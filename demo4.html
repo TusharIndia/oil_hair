@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MK AgroFresh — Premium Ayurvedic Hair Care</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Premium Color Palette */
+    --primary: #163d2b;       /* Deep forest green */
+    --primary-light: #23543d;
+    --primary-dark: #0d261a;
+    --gold: #c8a96a;          /* Muted gold / champagne */
+    --gold-light: #dfc48c;
+    --accent: #5f8f6b;        /* Soft herbal green */
+    --bg: #f9f7f3;            /* Warm off-white */
+    --surface: #ffffff;
+    --text-main: #1a1a1a;     /* Dark charcoal */
+    --text-muted: #666666;
+    
+    /* Layout & Styling */
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --shadow-soft: 0 10px 40px -10px rgba(22, 61, 43, 0.08);
+    --shadow-hover: 0 20px 50px -15px rgba(22, 61, 43, 0.15);
+    --shadow-gold: 0 10px 30px -10px rgba(200, 169, 106, 0.4);
+    
+    /* Transitions */
+    --transition-slow: 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-fast: 0.3s ease;
+  }
+
+  /* Carousel Specific */
+  .hero-slider { position: relative; width: 100%; height: 100%; }
+  .hero-slide {
+    position: absolute; inset: 0; opacity: 0; visibility: hidden;
+    transition: opacity 1.2s ease, visibility 1.2s ease;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-slide.active { opacity: 1; visibility: visible; z-index: 5; }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+    transform: scale(1.1); transition: transform 6s ease;
+  }
+  .hero-slide.active .hero-bg { transform: scale(1); }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-size: 16px; }
+  
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text-main);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, .font-serif {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    line-height: 1.1;
+    color: var(--primary);
+  }
+
+  img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  a { text-decoration: none; color: inherit; transition: var(--transition-fast); }
+  button { font-family: inherit; cursor: pointer; border: none; outline: none; }
+  ul { list-style: none; }
+
+  ::selection { background: var(--gold); color: var(--white); }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }
+
+  /* ── UTILITIES ── */
+  .container { max-width: 1400px; margin: 0 auto; padding: 0 5%; }
+  .section { padding: 120px 0; }
+  .section-sm { padding: 80px 0; }
+  
+  .section-label {
+    font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 16px; font-weight: 600;
+  }
+  .section-title {
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+  }
+  .section-title em { color: var(--gold); font-style: italic; }
+
+  /* Reveal Animations */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .delay-100 { transition-delay: 0.1s; }
+  .delay-200 { transition-delay: 0.2s; }
+  .delay-300 { transition-delay: 0.3s; }
+
+  /* ── NAVBAR ── */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 24px 5%;
+    background: transparent;
+    transition: background 0.4s, padding 0.4s, border 0.4s;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .nav.scrolled {
+    background: rgba(249, 247, 243, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 16px 5%;
+    border-bottom: 1px solid rgba(22, 61, 43, 0.1);
+    box-shadow: var(--shadow-soft);
+  }
+  
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-weight: 600;
+    color: #ffffff; letter-spacing: 0.02em;
+    transition: color 0.4s;
+    display: flex; flex-direction: column; line-height: 0.9;
+  }
+  .nav.scrolled .nav-logo { color: var(--primary); }
+  .nav-logo span { color: var(--gold); }
+  .nav-logo small {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.5rem; letter-spacing: 0.4em; text-transform: uppercase;
+    color: rgba(255,255,255,0.7); font-weight: 600; transition: color 0.4s;
+  }
+  .nav.scrolled .nav-logo small { color: var(--accent); }
+
+  .nav-links { display: flex; gap: 40px; }
+  .nav-links a {
+    color: #ffffff; font-size: 0.8rem; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    position: relative; transition: color 0.4s;
+  }
+  .nav.scrolled .nav-links a { color: var(--text-main); }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -4px; left: 0;
+    width: 0; height: 1px; background: var(--gold);
+    transition: width 0.3s ease;
+  }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-links a:hover { color: var(--gold) !important; }
+
+  .nav-actions { display: flex; gap: 24px; align-items: center; color: #ffffff; transition: color 0.4s; }
+  .nav.scrolled .nav-actions { color: var(--primary); }
+  .nav-icon { cursor: pointer; transition: color 0.3s; display: flex; align-items: center; position: relative; }
+  .nav-icon:hover { color: var(--gold); }
+  .cart-badge {
+    position: absolute; top: -6px; right: -8px;
+    background: var(--gold); color: var(--primary-dark);
+    font-size: 0.6rem; font-weight: 700;
+    width: 16px; height: 16px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .btn-primary {
+    background: var(--primary); color: #fff;
+    padding: 12px 28px; border-radius: 50px;
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover {
+    background: var(--primary-light); transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(22, 61, 43, 0.2);
+  }
+  
+  .hamburger { display: none; flex-direction: column; gap: 6px; cursor: pointer; z-index: 1001;}
+  .hamburger span { width: 28px; height: 2px; background: currentColor; transition: 0.3s; }
+
+  /* ── HERO SECTION ── */
+  .hero {
+    position: relative; width: 100%; height: 100vh; min-height: 700px;
+    background: #000; overflow: hidden;
+  }
+  .hero-gradient {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(22,61,43,0.4) 0%, rgba(22,61,43,0.2) 40%, rgba(22,61,43,0.8) 100%);
+    z-index: 2;
+  }
+  .hero-content {
+    position: relative; z-index: 10; height: 100%;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; max-width: 1100px; padding: 100px 5% 60px;
+    margin: 0 auto;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(8px); color: var(--gold);
+    padding: 8px 20px; border-radius: 50px;
+    font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .hero-title {
+    font-size: clamp(2rem, 9vw, 6.5rem); color: #ffffff;
+    line-height: 1.1; margin-bottom: 24px; text-shadow: 0 4px 30px rgba(0,0,0,0.4);
+    font-weight: 400;
+  }
+  .hero-title em { color: var(--gold); font-style: italic; font-weight: 300; }
+  .hero-desc {
+    font-size: clamp(0.9rem, 2vw, 1.25rem); color: rgba(255,255,255,0.9); font-weight: 300;
+    line-height: 1.6; margin-bottom: 40px; max-width: 750px;
+  }
+  .hero-actions { display: flex; gap: 20px; align-items: center; justify-content: center; flex-wrap: wrap; }
+  
+  .hero-dots {
+    position: absolute; bottom: 40px; right: 5%;
+    display: flex; flex-direction: column; gap: 12px; z-index: 20;
+  }
+  .dot {
+    width: 2px; height: 30px; background: rgba(255,255,255,0.3);
+    cursor: pointer; transition: 0.4s;
+  }
+  .dot.active { background: var(--gold); height: 50px; }
+
+  .scroll-indicator {
+    position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    color: #fff; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+    z-index: 20; opacity: 0.7;
+  }
+  .mouse {
+    width: 20px; height: 35px; border: 1.5px solid rgba(255,255,255,0.5);
+    border-radius: 20px; position: relative;
+  }
+  .wheel {
+    width: 2px; height: 6px; background: var(--gold);
+    position: absolute; top: 6px; left: 50%; transform: translateX(-50%);
+    animation: scroll-wheel 2s infinite;
+  }
+  @keyframes scroll-wheel { 0% { transform: translate(-50%, 0); opacity: 1; } 100% { transform: translate(-50%, 15px); opacity: 0; } }
+  
+  .btn-gold {
+    background: var(--gold); color: var(--primary-dark);
+    padding: 16px 36px; border-radius: 50px;
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    transition: all 0.3s ease; box-shadow: var(--shadow-gold);
+  }
+  .btn-gold:hover { background: var(--gold-light); transform: translateY(-3px); box-shadow: 0 15px 35px -10px rgba(200, 169, 106, 0.6); }
+  
+  .btn-text {
+    color: #fff; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    display: flex; align-items: center; gap: 8px; transition: color 0.3s;
+  }
+  .btn-text:hover { color: var(--gold); }
+  .btn-text svg { transition: transform 0.3s; }
+  .btn-text:hover svg { transform: translateX(4px); }
+
+  /* ── TRUST MARQUEE ── */
+  .trust-strip {
+    background: var(--primary); padding: 16px 0;
+    border-top: 1px solid rgba(200,169,106,0.2);
+    border-bottom: 1px solid rgba(200,169,106,0.2);
+    overflow: hidden; white-space: nowrap; display: flex; align-items: center;
+  }
+  .trust-track {
+    display: inline-flex; animation: marquee 35s linear infinite;
+  }
+  .trust-item {
+    display: inline-flex; align-items: center; gap: 16px;
+    color: rgba(255,255,255,0.8); font-size: 0.75rem; font-weight: 500;
+    letter-spacing: 0.15em; text-transform: uppercase; padding: 0 40px;
+  }
+  .trust-item svg { color: var(--gold); width: 16px; height: 16px; }
+  @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+  /* ── FEATURES (ICONS) ── */
+  .features-wrap { background: var(--surface); padding: 80px 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
+  .features-grid {
+    display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+  }
+  .feat-box {
+    flex: 1; min-width: 180px; text-align: center;
+    padding: 20px; transition: transform 0.3s;
+  }
+  .feat-box:hover { transform: translateY(-5px); }
+  .feat-icon {
+    width: 64px; height: 64px; margin: 0 auto 20px;
+    background: var(--bg); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--primary); border: 1px solid rgba(22,61,43,0.1);
+    transition: all 0.3s;
+  }
+  .feat-box:hover .feat-icon { background: var(--primary); color: var(--gold); border-color: var(--primary); }
+  .feat-title { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600; color: var(--text-main); margin-bottom: 8px; }
+  .feat-sub { font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; }
+
+  /* ── CATEGORY GRID ── */
+  .cat-grid {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 350px 350px;
+    gap: 20px; margin-top: 40px;
+  }
+  .cat-card {
+    position: relative; border-radius: var(--radius-md); overflow: hidden;
+    cursor: pointer; background: var(--primary-dark);
+  }
+  .cat-card:first-child { grid-row: 1 / 3; grid-column: 1 / 2; }
+  .cat-card img { transition: transform 0.8s var(--transition-slow), opacity 0.4s; opacity: 0.85; }
+  .cat-card:hover img { transform: scale(1.05); opacity: 0.6; }
+  .cat-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(13,38,26,0.9) 0%, rgba(13,38,26,0.2) 60%, transparent 100%);
+    padding: 30px; display: flex; flex-direction: column; justify-content: flex-end;
+  }
+  .cat-title { font-size: 2rem; color: #fff; margin-bottom: 8px; }
+  .cat-link {
+    color: var(--gold); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; display: flex; align-items: center; gap: 6px;
+    opacity: 0; transform: translateY(10px); transition: all 0.4s ease;
+  }
+  .cat-card:hover .cat-link { opacity: 1; transform: translateY(0); }
+
+  /* ── FEATURED PRODUCTS ── */
+  .prod-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; flex-wrap: wrap; gap: 20px; }
+  .prod-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
+  .prod-card {
+    background: var(--surface); border-radius: var(--radius-md);
+    padding: 16px; transition: var(--transition-fast);
+    border: 1px solid rgba(0,0,0,0.03);
+  }
+  .prod-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-5px); }
+  .prod-img-box {
+    position: relative; height: 320px; border-radius: var(--radius-sm);
+    background: var(--bg); overflow: hidden; margin-bottom: 20px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .prod-img-box img { width: 85%; height: 85%; object-fit: contain; transition: transform 0.6s ease; filter: drop-shadow(0 15px 20px rgba(0,0,0,0.1)); }
+  .prod-card:hover .prod-img-box img { transform: scale(1.08) translateY(-5px); }
+  
+  .badge {
+    position: absolute; top: 0px; right: 0px;
+    background: var(--gold); color: var(--primary-dark);
+    font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 8px 16px; border-radius: 0 0 0 16px;
+    z-index: 10;
+  }
+  .badge.sale { background: var(--primary); color: #fff; }
+  
+  .prod-info { text-align: center; }
+  .prod-stars { display: flex; justify-content: center; gap: 2px; color: var(--gold); margin-bottom: 8px; }
+  .prod-stars svg { width: 14px; height: 14px; fill: currentColor; }
+  .prod-name { font-size: 1.4rem; color: var(--primary); margin-bottom: 6px; cursor: pointer; transition: color 0.3s; }
+  .prod-name:hover { color: var(--accent); }
+  .prod-desc { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 16px; }
+  .prod-price { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: var(--text-main); margin-bottom: 16px; display: flex; justify-content: center; gap: 8px; align-items: center; }
+  .prod-price del { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.9rem; color: #999; font-weight: 400; }
+  
+  .btn-add {
+    width: 100%; background: transparent; border: 1px solid var(--primary);
+    color: var(--primary); padding: 12px; border-radius: 50px;
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    transition: all 0.3s; display: flex; justify-content: center; align-items: center; gap: 8px;
+  }
+  .btn-add:hover { background: var(--primary); color: #fff; }
+
+  /* ── BRAND STORY (SPLIT) ── */
+  .story-section { background: var(--surface); padding: 120px 0; overflow: hidden; }
+  .story-wrap { display: flex; align-items: center; gap: 80px; }
+  .story-img { flex: 1; position: relative; }
+  .story-img-main {
+    border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 4/5;
+    box-shadow: var(--shadow-hover);
+  }
+  .story-img-float {
+    position: absolute; bottom: -40px; right: -40px;
+    width: 50%; aspect-ratio: 1; border-radius: 50%; overflow: hidden;
+    border: 10px solid var(--surface); box-shadow: var(--shadow-soft);
+    animation: float 6s ease-in-out infinite;
+  }
+  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+  .story-content { flex: 1; }
+  .story-content p { font-size: 1rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 24px; font-weight: 300; }
+  .signature { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--gold); font-style: italic; margin-top: 30px; }
+
+  /* ── BEFORE / AFTER ── */
+  .results { background: var(--bg); }
+  .results-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 50px; }
+  .result-card { background: var(--surface); border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-soft); }
+  .ba-images { display: flex; height: 250px; position: relative; }
+  .ba-half { flex: 1; position: relative; overflow: hidden; }
+  .ba-label {
+    position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+    background: rgba(255,255,255,0.9); color: var(--text-main);
+    font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 4px 12px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+  .ba-line {
+    position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: var(--gold); z-index: 2; transform: translateX(-50%);
+  }
+  .ba-line::after {
+    content: 'VS'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    background: var(--gold); color: var(--primary-dark); font-size: 0.6rem; font-weight: 700;
+    padding: 6px; border-radius: 50%; border: 2px solid var(--surface);
+  }
+  .result-text { padding: 24px; text-align: center; }
+  .result-text h4 { font-size: 1.25rem; margin-bottom: 8px; }
+  .result-text p { font-size: 0.85rem; color: var(--text-muted); }
+
+  /* ── SPECIAL OFFER ── */
+  .offer-section { position: relative; padding: 120px 0; background: var(--primary); overflow: hidden; }
+  .offer-bg {
+    position: absolute; inset: 0; opacity: 0.4;
+    background: url('lifestyle_product_bathroom.png') center/cover no-repeat;
+    mix-blend-mode: overlay;
+  }
+  .offer-content { position: relative; z-index: 10; text-align: center; color: #fff; max-width: 600px; margin: 0 auto; }
+  .offer-content .section-title { color: #fff; }
+  .timer { display: flex; justify-content: center; gap: 20px; margin: 40px 0; }
+  .time-box {
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px); border-radius: var(--radius-sm);
+    width: 80px; height: 80px; display: flex; flex-direction: column; justify-content: center; align-items: center;
+  }
+  .time-num { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; line-height: 1; color: var(--gold); }
+  .time-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; opacity: 0.8; }
+  .promo-code {
+    display: inline-block; border: 1px dashed var(--gold); padding: 12px 24px; border-radius: 50px;
+    font-size: 0.9rem; letter-spacing: 0.2em; font-weight: 600; margin-bottom: 30px;
+  }
+
+  /* ── TESTIMONIALS ── */
+  .testi-section { background: var(--surface); overflow: hidden; }
+  .testi-slider { display: flex; gap: 30px; transition: transform 0.5s ease; margin-top: 40px; }
+  .testi-card {
+    min-width: 400px; background: var(--bg); border-radius: var(--radius-md);
+    padding: 40px; border: 1px solid rgba(0,0,0,0.03); flex-shrink: 0;
+  }
+  .quote-mark { font-family: 'Cormorant Garamond', serif; font-size: 4rem; color: var(--gold); line-height: 0.5; opacity: 0.4; }
+  .testi-text { font-size: 1rem; line-height: 1.7; color: var(--text-main); margin: 20px 0; font-style: italic; }
+  .testi-user { display: flex; align-items: center; gap: 16px; margin-top: auto; }
+  .testi-avatar { width: 50px; height: 50px; border-radius: 50%; overflow: hidden; border: 2px solid var(--gold); }
+  .testi-name { font-weight: 600; font-size: 0.9rem; color: var(--primary); }
+  .testi-role { font-size: 0.75rem; color: var(--text-muted); }
+  .slider-controls { display: flex; gap: 12px; justify-content: flex-end; margin-top: 30px; }
+  .ctrl-btn { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--primary); background: transparent; color: var(--primary); display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
+  .ctrl-btn:hover { background: var(--primary); color: #fff; }
+
+  /* ── FOOTER ── */
+  .footer { background: var(--primary-dark); color: #fff; padding: 80px 0 30px; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 60px; margin-bottom: 60px; }
+  .footer-desc { color: rgba(255,255,255,0.6); font-size: 0.9rem; line-height: 1.8; margin: 20px 0; max-width: 300px; font-weight: 300; }
+  .socials { display: flex; gap: 12px; }
+  .social-icon { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; color: var(--gold); transition: all 0.3s; }
+  .social-icon:hover { background: var(--gold); color: var(--primary-dark); transform: translateY(-3px); }
+  .footer-title { font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; font-weight: 600; }
+  .footer-links { display: flex; flex-direction: column; gap: 14px; }
+  .footer-links a { color: rgba(255,255,255,0.6); font-size: 0.85rem; transition: color 0.3s; font-weight: 300; }
+  .footer-links a:hover { color: var(--gold); }
+  
+  .newsletter-form { display: flex; margin-top: 20px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 8px; }
+  .newsletter-form input { flex: 1; background: transparent; border: none; color: #fff; font-size: 0.9rem; font-family: inherit; }
+  .newsletter-form input::placeholder { color: rgba(255,255,255,0.4); }
+  .newsletter-form button { background: transparent; color: var(--gold); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; }
+  
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; display: flex; justify-content: space-between; align-items: center; color: rgba(255,255,255,0.4); font-size: 0.8rem; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1200px) {
+    .prod-grid { grid-template-columns: repeat(3, 1fr); }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+  }
+  @media (max-width: 992px) {
+    .hero-title { font-size: 3.5rem; }
+    .story-wrap { flex-direction: column; text-align: center; }
+    .story-img-float { width: 40%; right: 0; }
+    .cat-grid { grid-template-columns: 1fr 1fr; }
+    .cat-card:first-child { grid-column: 1 / 3; grid-row: 1; height: 350px; }
+    .results-grid { grid-template-columns: 1fr 1fr; }
+    .features-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 768px) {
+    .nav { padding: 16px 5%; }
+    .nav-links, .nav-actions { display: none; }
+    .hamburger { display: flex; color: #fff; }
+    .nav.scrolled .hamburger { color: var(--primary); }
+    .hero-title { font-size: 2.8rem; }
+    .prod-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+    .results-grid { grid-template-columns: 1fr; }
+    .testi-card { min-width: 300px; padding: 30px; }
+    .time-box { width: 65px; height: 65px; }
+    .time-num { font-size: 1.8rem; }
+  }
+  @media (max-width: 480px) {
+    .prod-grid { grid-template-columns: 1fr; }
+    .cat-grid { grid-template-columns: 1fr; }
+    .cat-card:first-child { grid-column: 1; }
+    .features-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Loader -->
+<div id="loader" class="loader-wrapper">
+    <div class="spinner"></div>
+</div>
+
+<!-- Scroll Progress -->
+<div id="scrollProgress" class="scroll-progress"></div>
+
+<!-- 1. Smart Navbar -->
+<nav class="nav" id="navbar">
+    <a href="#" class="nav-logo">
+        MK AgroFresh<span>.</span>
+        <small>Botanical Mastery</small>
+    </a>
+    
+    <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#shop">Shop</a></li>
+        <li><a href="#ingredients">Ingredients</a></li>
+        <li><a href="#story">About</a></li>
+    </ul>
+
+    <div class="nav-actions">
+        <div class="nav-icon">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        </div>
+        <div class="nav-icon">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+            <span class="cart-badge">2</span>
+        </div>
+        <a href="#shop" class="btn-primary">Shop Now</a>
+    </div>
+
+    <div class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+    </div>
+</nav>
+
+<!-- 2. Hero Carousel -->
+<section id="home" class="hero">
+    <div class="hero-slider" id="heroSlider">
+        <!-- Slide 1 -->
+        <div class="hero-slide active">
+            <div class="hero-bg" style="background-image: url('ingredients_ayurvedic.png')"></div>
+            <div class="hero-gradient"></div>
+            <div class="container hero-content">
+                <div class="reveal">
+                    <div class="hero-tag">
+                        <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L15 9l7 1-5 5 1 7-7-4-7 4 1-7-5-5 7-1z"/></svg>
+                        100% Ayurvedic Formulation
+                    </div>
+                    <h1 class="hero-title">Stronger, <br><em>Healthier Hair</em> <br>The Natural Way.</h1>
+                    <p class="hero-desc">Elevate your hair care ritual. Crafted with ancient Ayurvedic wisdom and advanced botanical extraction for visible, lasting results.</p>
+                    <div class="hero-actions">
+                        <a href="#shop" class="btn-gold">Explore Collection</a>
+                        <a href="#story" class="btn-text">Discover Our Story</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Slide 2 -->
+        <div class="hero-slide">
+            <div class="hero-bg" style="background-image: url('lifestyle_product_bathroom.png')"></div>
+            <div class="hero-gradient"></div>
+            <div class="container hero-content">
+                <div class="reveal">
+                    <div class="hero-tag">Botanical Excellence</div>
+                    <h1 class="hero-title">Roots Deeply <br><em>Nourished.</em></h1>
+                    <p class="hero-desc">Discover the secret to enduring scalp health with our cold-pressed herbal infusions.</p>
+                    <div class="hero-actions">
+                        <a href="#shop" class="btn-gold">Shop Best-Sellers</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Slide 3 -->
+        <div class="hero-slide">
+            <div class="hero-bg" style="background-image: url('ingredients_hibiscus.png')"></div>
+            <div class="hero-gradient"></div>
+            <div class="container hero-content">
+                <div class="reveal">
+                    <div class="hero-tag">Modern Science & Ancient Wisdom</div>
+                    <h1 class="hero-title">A Ritual of <br><em>Self-Love.</em></h1>
+                    <p class="hero-desc">More than just hair care—it's a tradition passed down through generations, refined for the modern world.</p>
+                    <div class="hero-actions">
+                        <a href="#story" class="btn-gold">Learn Our Method</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hero-dots">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </div>
+</section>
+
+<!-- Trust Marquee -->
+<div class="trust-strip">
+    <div class="trust-track">
+        <!-- Repeat for seamless scrolling -->
+        <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg> 100% Natural Ingredients</span>
+        <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg> No Harmful Chemicals</span>
+        <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg> Clinically Tested</span>
+        <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg> Trusted by 10,000+ Users</span>
+        <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg> Visible Results in Weeks</span>
+        
+        <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg> 100% Natural Ingredients</span>
+        <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg> No Harmful Chemicals</span>
+        <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg> Clinically Tested</span>
+        <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg> Trusted by 10,000+ Users</span>
+        <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg> Visible Results in Weeks</span>
+    </div>
+</div>
+
+<!-- 3. Category Grid -->
+<section class="section container">
+    <div class="reveal text-center">
+        <div class="section-label">Curated Collections</div>
+        <h2 class="section-title">Shop by <em>Concern</em></h2>
+    </div>
+    <div class="cat-grid">
+        <a href="#" class="cat-card reveal">
+            <img src="lifestyle_hair_model.png" alt="Hair Fall Control">
+            <div class="cat-overlay">
+                <h3 class="cat-title">Hair Fall Control</h3>
+                <span class="cat-link">Explore Ritual <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+            </div>
+        </a>
+        <a href="#" class="cat-card reveal delay-100">
+            <img src="ingredients_neem_macro.png" alt="Scalp Health">
+            <div class="cat-overlay">
+                <h3 class="cat-title">Scalp Health</h3>
+                <span class="cat-link">Explore Ritual <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+            </div>
+        </a>
+        <a href="#" class="cat-card reveal delay-200">
+            <img src="ingredients_hibiscus.png" alt="Herbal Serums">
+            <div class="cat-overlay">
+                <h3 class="cat-title">Herbal Serums</h3>
+                <span class="cat-link">Explore Ritual <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+            </div>
+        </a>
+        <a href="#" class="cat-card reveal delay-100">
+            <img src="lifestyle_product_bathroom.png" alt="Combo Kits">
+            <div class="cat-overlay">
+                <h3 class="cat-title">Combo Kits</h3>
+                <span class="cat-link">Explore Ritual <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+            </div>
+        </a>
+        <a href="#" class="cat-card reveal delay-200">
+            <img src="ingredients_ayurvedic.png" alt="Deep Hydration">
+            <div class="cat-overlay">
+                <h3 class="cat-title">Deep Hydration</h3>
+                <span class="cat-link">Explore Ritual <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+            </div>
+        </a>
+    </div>
+</section>
+
+<!-- 4. Featured Products -->
+<section id="shop" class="section container">
+    <div class="prod-header reveal">
+        <div>
+            <div class="section-label">Bestsellers</div>
+            <h2 class="section-title" style="margin-bottom:0;">High <em>Performance</em> Blends</h2>
+        </div>
+        <a href="#" class="btn-text" style="color:var(--primary);">View All Formulations <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+    </div>
+
+    <div class="prod-grid">
+        <!-- Product 1 -->
+        <div class="prod-card reveal">
+            <div class="prod-img-box">
+                <span class="badge sale">Bestseller</span>
+                <img src="product_oil.png" alt="Amla & Bhringraj Oil">
+            </div>
+            <div class="prod-info">
+                <div class="prod-stars">
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </div>
+                <h3 class="prod-name">Intense Growth Oil</h3>
+                <p class="prod-desc">Amla & Bhringraj Infusion</p>
+                <div class="prod-price">₹550 <del>₹650</del></div>
+                <button class="btn-add">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="prod-card reveal delay-100">
+            <div class="prod-img-box">
+                <span class="badge">New</span>
+                <img src="product_serum.png" alt="Scalp Restore Serum">
+            </div>
+            <div class="prod-info">
+                <div class="prod-stars">
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </div>
+                <h3 class="prod-name">Scalp Restore Serum</h3>
+                <p class="prod-desc">With 5% Pea Sprout Extract</p>
+                <div class="prod-price">₹625 <del>₹750</del></div>
+                <button class="btn-add">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="prod-card reveal delay-200">
+            <div class="prod-img-box">
+                <img src="product_mask.png" alt="Deep Hydration Mask">
+            </div>
+            <div class="prod-info">
+                <div class="prod-stars">
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </div>
+                <h3 class="prod-name">Deep Hydration Mask</h3>
+                <p class="prod-desc">Shea Butter & Aloe Vera</p>
+                <div class="prod-price">₹499 <del>₹599</del></div>
+                <button class="btn-add">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+
+        <!-- Product 4 -->
+        <div class="prod-card reveal delay-300">
+            <div class="prod-img-box">
+                <span class="badge sale">Combo Kit</span>
+                <img src="ritual_oil_application.png" alt="Complete Ritual Kit">
+            </div>
+            <div class="prod-info">
+                <div class="prod-stars">
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </div>
+                <h3 class="prod-name">Complete Ritual Kit</h3>
+                <p class="prod-desc">Oil + Serum + Cleanser</p>
+                <div class="prod-price">₹1,299 <del>₹1,800</del></div>
+                <button class="btn-add">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+
+        <!-- Product 5 -->
+        <div class="prod-card reveal">
+            <div class="prod-img-box">
+                <img src="product_oil.png" alt="Onion Hair Oil">
+            </div>
+            <div class="prod-info">
+                <div class="prod-stars">
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </div>
+                <h3 class="prod-name">Onion Growth Oil</h3>
+                <p class="prod-desc">Advanced Strengthening</p>
+                <div class="prod-price">₹450</div>
+                <button class="btn-add">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+
+        <!-- Product 6 -->
+        <div class="prod-card reveal delay-100">
+            <div class="prod-img-box">
+                <span class="badge">Limited</span>
+                <img src="product_serum.png" alt="Argan Shine Serum">
+            </div>
+            <div class="prod-info">
+                <div class="prod-stars">
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </div>
+                <h3 class="prod-name">Rosemary Serum</h3>
+                <p class="prod-desc">Follicle Revitalizer</p>
+                <div class="prod-price">₹580</div>
+                <button class="btn-add">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+
+        <!-- Product 7 -->
+        <div class="prod-card reveal delay-200">
+            <div class="prod-img-box">
+                <img src="product_mask.png" alt="Herbal Conditioner">
+            </div>
+            <div class="prod-info">
+                <div class="prod-stars">
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </div>
+                <h3 class="prod-name">Herbal Conditioner</h3>
+                <p class="prod-desc">Ayurvedic Smoothness</p>
+                <div class="prod-price">₹399</div>
+                <button class="btn-add">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+
+        <!-- Product 8 -->
+        <div class="prod-card reveal delay-300">
+            <div class="prod-img-box">
+                <span class="badge sale">Offer</span>
+                <img src="lifestyle_product_bathroom.png" alt="Spa Day Bundle">
+            </div>
+            <div class="prod-info">
+                <div class="prod-stars">
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </div>
+                <h3 class="prod-name">Spa Day Bundle</h3>
+                <p class="prod-desc">Ultimate Self-Care</p>
+                <div class="prod-price">₹1,499 <del>₹2,200</del></div>
+                <button class="btn-add">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 5. Brand Story (Split Layout) -->
+<section id="story" class="story-section">
+    <div class="container story-wrap">
+        <div class="story-img reveal">
+            <div class="story-img-main">
+                <img src="ritual_oil_application.png" alt="Ayurvedic Preparation">
+            </div>
+            <div class="story-img-float">
+                <img src="ingredients_bhringraj.png" alt="Fresh Herbs">
+            </div>
+        </div>
+        <div class="story-content reveal delay-200">
+            <div class="section-label">Our Philosophy</div>
+            <h2 class="section-title">Rooted in Nature,<br><em>Backed by Science.</em></h2>
+            <p>At MK AgroFresh, we believe true hair wellness doesn't come from a lab—it comes from the earth. By bridging the gap between 5,000-year-old Ayurvedic texts and modern dermatological science, we create formulas that actually work.</p>
+            <p>Every drop is cold-pressed in-house to ensure vital nutrients, lipids, and vitamins remain intact. No shortcuts, no mineral oils, no artificial fragrances. Just pure, potent botanicals.</p>
+            <div class="signature">MK AgroFresh</div>
+        </div>
+    </div>
+</section>
+
+<!-- 6. Features Icons -->
+<section id="ingredients" class="features-wrap">
+    <div class="container features-grid">
+        <div class="feat-box reveal">
+            <div class="feat-icon">
+                <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <h4 class="feat-title">100% Pure</h4>
+            <p class="feat-sub">Sourced directly from organic farms.</p>
+        </div>
+        <div class="feat-box reveal delay-100">
+            <div class="feat-icon">
+                <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a2 2 0 00-1.96 1.414l-.724 2.17a2 2 0 002.575 2.508l2.17-.724a2 2 0 001.414-1.96l-.477-2.387zM8.333 8.333a4 4 0 100-8 4 4 0 000 8zM10.5 20.5l-4-4"/></svg>
+            </div>
+            <h4 class="feat-title">Toxin Free</h4>
+            <p class="feat-sub">Zero parabens or mineral oils.</p>
+        </div>
+        <div class="feat-box reveal delay-200">
+            <div class="feat-icon">
+                <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <h4 class="feat-title">Clinically Proven</h4>
+            <p class="feat-sub">Dermatologically tested for safety.</p>
+        </div>
+        <div class="feat-box reveal delay-300">
+            <div class="feat-icon">
+                <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/></svg>
+            </div>
+            <h4 class="feat-title">Cruelty Free</h4>
+            <p class="feat-sub">Never tested on animals.</p>
+        </div>
+    </div>
+</section>
+
+<!-- 7. Before / After Section -->
+<section class="section results">
+    <div class="container">
+        <div class="text-center reveal">
+            <div class="section-label">Transformations</div>
+            <h2 class="section-title">Visible <em>Results</em> in Weeks</h2>
+        </div>
+        <div class="results-grid">
+            
+            <div class="result-card reveal">
+                <div class="ba-images">
+                    <div class="ba-half">
+                        <img src="https://images.unsplash.com/photo-1519735811596-c339a0f2283b?q=80&w=400&auto=format&fit=crop" alt="Before">
+                        <span class="ba-label">Day 1</span>
+                    </div>
+                    <div class="ba-line"></div>
+                    <div class="ba-half">
+                        <img src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?q=80&w=400&auto=format&fit=crop" alt="After">
+                        <span class="ba-label" style="background:var(--gold);color:var(--primary-dark);">Week 8</span>
+                    </div>
+                </div>
+                <div class="result-text">
+                    <h4 class="font-serif">Restored Density</h4>
+                    <p>Using Intense Growth Oil</p>
+                </div>
+            </div>
+
+            <div class="result-card reveal delay-100">
+                <div class="ba-images">
+                    <div class="ba-half">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop" alt="Before">
+                        <span class="ba-label">Day 1</span>
+                    </div>
+                    <div class="ba-line"></div>
+                    <div class="ba-half">
+                        <img src="https://images.unsplash.com/photo-1526045612212-70caf35c14df?q=80&w=400&auto=format&fit=crop" alt="After">
+                        <span class="ba-label" style="background:var(--gold);color:var(--primary-dark);">Week 12</span>
+                    </div>
+                </div>
+                <div class="result-text">
+                    <h4 class="font-serif">Enhanced Thickness</h4>
+                    <p>Using Scalp Restore Serum</p>
+                </div>
+            </div>
+
+            <div class="result-card reveal delay-200">
+                <div class="ba-images">
+                    <div class="ba-half">
+                        <img src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?q=80&w=400&auto=format&fit=crop" alt="Before">
+                        <span class="ba-label">Day 1</span>
+                    </div>
+                    <div class="ba-line"></div>
+                    <div class="ba-half">
+                        <img src="https://images.unsplash.com/photo-1582095133179-bfd08e2fc6b3?q=80&w=400&auto=format&fit=crop" alt="After">
+                        <span class="ba-label" style="background:var(--gold);color:var(--primary-dark);">Week 6</span>
+                    </div>
+                </div>
+                <div class="result-text">
+                    <h4 class="font-serif">Frizz Control & Shine</h4>
+                    <p>Using Deep Hydration Mask</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- 8. Special Offer -->
+<section class="offer-section">
+    <div class="offer-bg"></div>
+    <div class="container">
+        <div class="offer-content reveal">
+            <div class="section-label" style="color:var(--gold);">Welcome Offer</div>
+            <h2 class="section-title">Flat 20% Off <br><em>On First Order</em></h2>
+            <p style="font-size:1.1rem; font-weight:300; margin-bottom:20px;">Begin your journey to healthier hair today.</p>
+            <div class="promo-code">CODE: <span style="color:var(--gold);">NATURE20</span></div>
+            
+            <div class="timer">
+                <div class="time-box">
+                    <span class="time-num" id="hours">00</span>
+                    <span class="time-label">Hours</span>
+                </div>
+                <div class="time-box">
+                    <span class="time-num" id="minutes">00</span>
+                    <span class="time-label">Mins</span>
+                </div>
+                <div class="time-box">
+                    <span class="time-num" id="seconds">00</span>
+                    <span class="time-label">Secs</span>
+                </div>
+            </div>
+            
+            <button class="btn-gold" style="margin-top:20px;">Claim Offer Now</button>
+        </div>
+    </div>
+</section>
+
+<!-- 9. Testimonials -->
+<section class="testi-section section-sm">
+    <div class="container">
+        <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:20px;" class="reveal">
+            <div>
+                <div class="section-label">Social Proof</div>
+                <h2 class="section-title" style="margin:0;">Loved by <em>Thousands</em></h2>
+            </div>
+            <div class="slider-controls">
+                <button class="ctrl-btn" id="prevTesti"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg></button>
+                <button class="ctrl-btn" id="nextTesti"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+            </div>
+        </div>
+        
+        <div style="overflow:hidden; padding: 20px 0;">
+            <div class="testi-slider" id="testiSlider">
+                <!-- Card 1 -->
+                <div class="testi-card">
+                    <div class="quote-mark">“</div>
+                    <p class="testi-text">The most luxurious hair oil I have ever used. Not sticky, smells incredibly earthy, and my hair fall reduced by half in just three weeks.</p>
+                    <div class="testi-user">
+                        <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80" alt="User"></div>
+                        <div>
+                            <div class="testi-name">Anya Sharma</div>
+                            <div class="testi-role">Verified Buyer</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="testi-card">
+                    <div class="quote-mark">“</div>
+                    <p class="testi-text">Finally, a brand that respects authentic Ayurveda. The formulation is potent. I can visibly see new baby hairs along my hairline.</p>
+                    <div class="testi-user">
+                        <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80" alt="User"></div>
+                        <div>
+                            <div class="testi-name">Vikram Patel</div>
+                            <div class="testi-role">Verified Buyer</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="testi-card">
+                    <div class="quote-mark">“</div>
+                    <p class="testi-text">I swapped my expensive chemical serums for MK AgroFresh. Best decision ever. My hair is softer, and the dry scalp issue is completely gone.</p>
+                    <div class="testi-user">
+                        <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&auto=format&fit=crop&q=80" alt="User"></div>
+                        <div>
+                            <div class="testi-name">Sarah Jenkins</div>
+                            <div class="testi-role">Verified Buyer</div>
+                        </div>
+                    </div>
+                </div>
+                 <!-- Card 4 -->
+                 <div class="testi-card">
+                    <div class="quote-mark">“</div>
+                    <p class="testi-text">The combo kit transformed my routine. The cleanser is gentle, and the oil penetrates perfectly. Highly recommended for damaged hair.</p>
+                    <div class="testi-user">
+                        <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80" alt="User"></div>
+                        <div>
+                            <div class="testi-name">Meera K.</div>
+                            <div class="testi-role">Verified Buyer</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 10. Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            
+            <!-- Brand -->
+            <div>
+                <a href="#" class="nav-logo" style="color:#fff;">
+                    MK AgroFresh<span style="color:var(--gold)">.</span>
+                </a>
+                <p class="footer-desc">Redefining hair care through the seamless integration of authentic Ayurveda and modern molecular science.</p>
+                <div class="socials">
+                    <a href="#" class="social-icon"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg></a>
+                    <a href="#" class="social-icon"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+                    <a href="#" class="social-icon"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm4.441 16.892c-2.102.144-6.784.144-8.883 0C5.282 16.736 5.017 15.622 5 12c.017-3.629.285-4.736 2.558-4.892 2.099-.144 6.782-.144 8.883 0C18.718 7.264 18.982 8.378 19 12c-.018 3.629-.285 4.736-2.559 4.892zM10 9.658l4.917 2.338L10 14.342V9.658z"/></svg></a>
+                </div>
+            </div>
+
+            <!-- Links 1 -->
+            <div>
+                <h4 class="footer-title">Explore</h4>
+                <div class="footer-links">
+                    <a href="#">Shop Collection</a>
+                    <a href="#">Hair Oils</a>
+                    <a href="#">Targeted Serums</a>
+                    <a href="#">Combos & Kits</a>
+                </div>
+            </div>
+
+            <!-- Links 2 -->
+            <div>
+                <h4 class="footer-title">Company</h4>
+                <div class="footer-links">
+                    <a href="#">Our Story</a>
+                    <a href="#">Ingredients Glossary</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+
+            <!-- Newsletter -->
+            <div>
+                <h4 class="footer-title">Stay Connected</h4>
+                <p class="footer-desc" style="font-size:0.8rem; margin-top:0;">Subscribe to receive exclusive botanical insights and early access to new harvests.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit">Join</button>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 MK AgroFresh. All rights reserved.</p>
+            <p>Crafted with 🌿 in India</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // ── PAGE LOADER ──
+    window.addEventListener('load', () => {
+        const loader = document.getElementById('loader');
+        setTimeout(() => { loader.classList.add('hidden'); }, 400);
+    });
+
+    // ── NAVBAR & SCROLL PROGRESS ──
+    const navbar = document.getElementById('navbar');
+    const scrollProgress = document.getElementById('scrollProgress');
+    
+    window.addEventListener('scroll', () => {
+        // Navbar glass effect
+        if(window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+
+        // Progress bar
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        scrollProgress.style.transform = `scaleX(${scrolled / 100})`;
+    });
+
+    // ── MOBILE MENU ──
+    const hamburger = document.getElementById('hamburger');
+    hamburger.addEventListener('click', () => {
+        // Simple toggle implementation (can be expanded with a full modal)
+        hamburger.classList.toggle('active');
+        if(hamburger.classList.contains('active')){
+            alert("Mobile Menu Opened"); // Placeholder for mobile menu logic
+        }
+    });
+
+    // ── SCROLL REVEAL ANIMATIONS ──
+    const reveals = document.querySelectorAll('.reveal');
+    const revealOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
+    
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, revealOptions);
+    
+    reveals.forEach(el => revealObserver.observe(el));
+
+    // ── TESTIMONIAL SLIDER ──
+    const testiSlider = document.getElementById('testiSlider');
+    let scrollAmount = 0;
+    
+    document.getElementById('nextTesti').addEventListener('click', () => {
+        const cardWidth = testiSlider.children[0].offsetWidth + 30; // + gap
+        const maxScroll = testiSlider.scrollWidth - testiSlider.parentElement.offsetWidth;
+        if(scrollAmount < maxScroll) {
+            scrollAmount += cardWidth;
+            testiSlider.style.transform = `translateX(-${scrollAmount}px)`;
+        }
+    });
+    
+    document.getElementById('prevTesti').addEventListener('click', () => {
+        const cardWidth = testiSlider.children[0].offsetWidth + 30;
+        if(scrollAmount > 0) {
+            scrollAmount -= cardWidth;
+            if(scrollAmount < 0) scrollAmount = 0;
+            testiSlider.style.transform = `translateX(-${scrollAmount}px)`;
+        }
+    });
+
+    // ── COUNTDOWN TIMER ──
+    let endTime = new Date().getTime() + (12 * 3600000) + (45 * 60000); // 12h 45m from now
+    
+    function updateTimer() {
+        const now = new Date().getTime();
+        const diff = endTime - now;
+        
+        if (diff <= 0) {
+            endTime = new Date().getTime() + (24 * 3600000); // Reset 24h
+            return;
+        }
+        
+        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((diff % (1000 * 60)) / 1000);
+        
+        document.getElementById('hours').textContent = String(h).padStart(2, '0');
+        document.getElementById('minutes').textContent = String(m).padStart(2, '0');
+        document.getElementById('seconds').textContent = String(s).padStart(2, '0');
+    }
+    
+    setInterval(updateTimer, 1000);
+    updateTimer();
+
+    // ── ADD TO CART LOGIC ──
+    const cartBadge = document.querySelector('.cart-badge');
+    let cartCount = parseInt(cartBadge.textContent);
+    
+    document.querySelectorAll('.btn-add').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            cartCount++;
+            cartBadge.textContent = cartCount;
+            
+            // Subtle feedback
+            btn.innerHTML = `<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> Added!`;
+            btn.style.background = 'var(--primary)';
+            btn.style.color = '#fff';
+            
+            setTimeout(() => {
+                btn.innerHTML = `<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg> Add to Cart`;
+                btn.style.background = 'transparent';
+                btn.style.color = 'var(--primary)';
+            }, 2000);
+
+            // Animate badge
+            cartBadge.style.transform = 'scale(1.2)';
+            setTimeout(() => { cartBadge.style.transform = 'scale(1)'; }, 200);
+        });
+    });
+    // ── HERO CAROUSEL ──
+    const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('.dot');
+    let currentSlide = 0;
+
+    function showSlide(index) {
+        slides.forEach(s => s.classList.remove('active'));
+        dots.forEach(d => d.classList.remove('active'));
+        
+        slides[index].classList.add('active');
+        dots[index].classList.add('active');
+        
+        // Trigger reveal in current slide
+        const currentReveal = slides[index].querySelector('.reveal');
+        if(currentReveal) {
+            currentReveal.classList.remove('visible');
+            setTimeout(() => { currentReveal.classList.add('visible'); }, 100);
+        }
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    }
+
+    dots.forEach((dot, idx) => {
+        dot.addEventListener('click', () => {
+            currentSlide = idx;
+            showSlide(currentSlide);
+        });
+    });
+
+    setInterval(nextSlide, 6000);
+</script>
+
+</body>
+</html>
