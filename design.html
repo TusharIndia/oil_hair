@@ -56,6 +56,8 @@
             overflow-x: hidden;
         }
 
+        [x-cloak] { display: none !important; }
+
         /* Scroll Reveal Animation */
         .reveal {
             opacity: 0;
@@ -682,15 +684,15 @@
             <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
             
             <div class="relative z-10 px-6 py-16 md:py-20 text-center flex flex-col items-center">
-                <span class="bg-brand-gold text-brand-dark text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider mb-6 inline-block">Limited Time Offer</span>
-                <h2 class="text-4xl md:text-5xl lg:text-6xl font-serif text-brand-cream mb-6 leading-tight">
-                    Start Your Natural <br/>Hair Journey Today.
+                <span class="bg-brand-gold text-brand-dark text-[10px] font-black px-5 py-2 rounded-full uppercase tracking-[0.3em] mb-8 inline-block shadow-lg">Special Invitation</span>
+                <h2 class="text-4xl md:text-5xl lg:text-7xl font-serif text-brand-cream mb-8 leading-[1.1]">
+                    Start Your Natural <br/><span class="italic text-brand-gold">Restoration Journey.</span>
                 </h2>
-                <p class="text-[#e0ebd4] text-lg max-w-xl mx-auto mb-10">
-                    Get a curated Hair Care Starter Kit. Experience the power of Ayurveda with our bestselling trio.
+                <p class="text-[#e0ebd4] text-lg md:text-xl max-w-2xl mx-auto mb-12 font-light leading-relaxed">
+                    Experience the synergy of ancient Ayurveda and modern science. Claim your exclusive starter kit today and witness the transformation.
                 </p>
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="#shop" class="bg-brand-cream text-brand-green px-8 py-4 rounded-full font-bold text-lg hover:bg-brand-gold hover:text-white transition-all duration-300 shadow-lg transform hover:-translate-y-1">
+                <div class="flex flex-col sm:flex-row gap-6">
+                    <a href="#shop" class="bg-brand-gold text-brand-dark px-12 py-5 rounded-full font-black text-sm hover:bg-brand-cream hover:text-brand-green hover:shadow-2xl transition-all duration-500 shadow-xl transform hover:-translate-y-1 uppercase tracking-[0.2em] text-center">
                         Claim 20% Off Kit
                     </a>
                 </div>
@@ -698,53 +700,75 @@
         </div>
     </section>
 
-    <!-- 8. RITUAL GUIDE (NEW) -->
+    <!-- 8. RITUAL GUIDE -->
     <section class="py-24 bg-brand-cream overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 reveal">
-                <h2 class="text-4xl md:text-5xl font-serif text-brand-green mb-4">The Hair Care Ritual</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Three simple steps to unlock your hair's true potential.</p>
+                <span class="text-brand-gold font-bold tracking-[0.4em] text-[10px] uppercase mb-4 block">The Ritual</span>
+                <h2 class="text-4xl md:text-5xl font-serif text-brand-green mb-4">Three Steps to <span class="italic">Vitality</span></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto font-light">A simple daily practice to unlock your hair's true potential.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-                <div class="bg-white p-10 rounded-[3rem] shadow-soft reveal">
-                    <div class="w-16 h-16 rounded-full bg-brand-beige flex items-center justify-center text-brand-green font-serif text-2xl font-bold mb-6">01</div>
+                <div class="bg-white p-12 rounded-[3.5rem] shadow-soft reveal group hover:-translate-y-2 transition-all duration-500">
+                    <div class="w-16 h-16 rounded-3xl bg-brand-beige flex items-center justify-center text-brand-green font-serif text-3xl font-bold mb-8 group-hover:bg-brand-green group-hover:text-white transition-colors">01</div>
                     <h3 class="text-2xl font-serif text-brand-green mb-4">Deep Massage</h3>
-                    <p class="text-gray-600 leading-relaxed">Apply warmed oil to scalp and massage for 10 minutes to stimulate circulation.</p>
+                    <p class="text-gray-600 leading-relaxed font-light">Apply warmed oil to scalp and massage for 10 minutes to stimulate follicular micro-circulation.</p>
                 </div>
-                <div class="bg-white p-10 rounded-[3rem] shadow-soft reveal delay-100">
-                    <div class="w-16 h-16 rounded-full bg-brand-beige flex items-center justify-center text-brand-green font-serif text-2xl font-bold mb-6">02</div>
+                <div class="bg-white p-12 rounded-[3.5rem] shadow-soft reveal delay-100 group hover:-translate-y-2 transition-all duration-500">
+                    <div class="w-16 h-16 rounded-3xl bg-brand-beige flex items-center justify-center text-brand-green font-serif text-3xl font-bold mb-8 group-hover:bg-brand-green group-hover:text-white transition-colors">02</div>
                     <h3 class="text-2xl font-serif text-brand-green mb-4">Rest & Absorb</h3>
-                    <p class="text-gray-600 leading-relaxed">Leave the botanical elixirs to work their magic for at least 45 minutes or overnight.</p>
+                    <p class="text-gray-600 leading-relaxed font-light">Leave the botanical elixirs to work their magic for at least 45 minutes or overnight for deep repair.</p>
                 </div>
-                <div class="bg-white p-10 rounded-[3rem] shadow-soft reveal delay-200">
-                    <div class="w-16 h-16 rounded-full bg-brand-beige flex items-center justify-center text-brand-green font-serif text-2xl font-bold mb-6">03</div>
+                <div class="bg-white p-12 rounded-[3.5rem] shadow-soft reveal delay-200 group hover:-translate-y-2 transition-all duration-500">
+                    <div class="w-16 h-16 rounded-3xl bg-brand-beige flex items-center justify-center text-brand-green font-serif text-3xl font-bold mb-8 group-hover:bg-brand-green group-hover:text-white transition-colors">03</div>
                     <h3 class="text-2xl font-serif text-brand-green mb-4">Gentle Cleanse</h3>
-                    <p class="text-gray-600 leading-relaxed">Wash with our herbal cleanser to reveal soft, strong, and revitalized strands.</p>
+                    <p class="text-gray-600 leading-relaxed font-light">Wash with our herbal cleanser to reveal soft, strong, and revitalized strands that shine naturally.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 9. FAQ SECTION (NEW) -->
-    <section class="py-24 bg-white" id="faq" x-data="{ active: null }">
+    <!-- 9. FAQ SECTION -->
+    <section class="py-24 bg-white" id="faq" x-data="{ activeFaq: null }">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 reveal">
-                <h2 class="text-4xl font-serif text-brand-green mb-4">Frequently Asked Questions</h2>
+                <span class="text-brand-gold font-bold tracking-[0.4em] text-[10px] uppercase mb-4 block">Knowledge Base</span>
+                <h2 class="text-4xl font-serif text-brand-green mb-4">Frequent <span class="italic text-brand-gold">Inquiries</span></h2>
             </div>
-            <div class="space-y-4">
-                <template x-for="(faq, index) in [
-                    { q: 'How soon can I see results?', a: 'Most users notice a reduction in hair fall within 3 weeks and improved growth in 8-12 weeks.' },
-                    { q: 'Is it safe for colored hair?', a: 'Yes, our oils are 100% natural and free from any harsh chemicals that strip color.' },
-                    { q: 'How often should I use it?', a: 'For best results, we recommend using the hair ritual at least 2-3 times a week.' }
-                ]" :key="index">
-                    <div class="border border-brand-beige rounded-2xl overflow-hidden reveal">
-                        <button @click="active = active === index ? null : index" class="w-full px-8 py-6 text-left flex justify-between items-center bg-brand-cream/30 hover:bg-brand-cream transition-colors">
-                            <span class="font-serif text-lg text-brand-green" x-text="faq.q"></span>
-                            <span class="text-brand-gold text-2xl transition-transform duration-300" :class="active === index ? 'rotate-45' : ''">+</span>
-                        </button>
-                        <div x-show="active === index" x-collapse x-cloak class="px-8 pb-8 text-gray-600 leading-relaxed" x-text="faq.a"></div>
+            
+            <div class="space-y-6">
+                <!-- FAQ Item 1 -->
+                <div class="border border-brand-beige rounded-[2rem] overflow-hidden reveal transition-all duration-300" :class="activeFaq === 0 ? 'shadow-lg border-brand-gold/20' : ''">
+                    <button @click="activeFaq = activeFaq === 0 ? null : 0" class="w-full px-10 py-7 text-left flex justify-between items-center bg-brand-cream/30 hover:bg-brand-cream transition-all group">
+                        <span class="font-serif text-xl text-brand-green group-hover:text-brand-gold transition-colors">How soon can I see results?</span>
+                        <span class="text-brand-gold text-2xl transition-transform duration-500" :class="activeFaq === 0 ? 'rotate-45' : ''">+</span>
+                    </button>
+                    <div x-show="activeFaq === 0" x-collapse x-cloak class="px-10 pb-8 text-gray-600 leading-relaxed font-light text-lg">
+                        Most users notice a reduction in hair fall within 3 weeks and significantly improved growth and density in 8-12 weeks of consistent use.
                     </div>
-                </template>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="border border-brand-beige rounded-[2rem] overflow-hidden reveal transition-all duration-300" :class="activeFaq === 1 ? 'shadow-lg border-brand-gold/20' : ''">
+                    <button @click="activeFaq = activeFaq === 1 ? null : 1" class="w-full px-10 py-7 text-left flex justify-between items-center bg-brand-cream/30 hover:bg-brand-cream transition-all group">
+                        <span class="font-serif text-xl text-brand-green group-hover:text-brand-gold transition-colors">Is it safe for chemically treated or colored hair?</span>
+                        <span class="text-brand-gold text-2xl transition-transform duration-500" :class="activeFaq === 1 ? 'rotate-45' : ''">+</span>
+                    </button>
+                    <div x-show="activeFaq === 1" x-collapse x-cloak class="px-10 pb-8 text-gray-600 leading-relaxed font-light text-lg">
+                        Absolutely. Our cold-pressed formulations are 100% natural and free from any harsh sulfates or parabens that strip color.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="border border-brand-beige rounded-[2rem] overflow-hidden reveal transition-all duration-300" :class="activeFaq === 2 ? 'shadow-lg border-brand-gold/20' : ''">
+                    <button @click="activeFaq = activeFaq === 2 ? null : 2" class="w-full px-10 py-7 text-left flex justify-between items-center bg-brand-cream/30 hover:bg-brand-cream transition-all group">
+                        <span class="font-serif text-xl text-brand-green group-hover:text-brand-gold transition-colors">How often should I use the hair ritual?</span>
+                        <span class="text-brand-gold text-2xl transition-transform duration-500" :class="activeFaq === 2 ? 'rotate-45' : ''">+</span>
+                    </button>
+                    <div x-show="activeFaq === 2" x-collapse x-cloak class="px-10 pb-8 text-gray-600 leading-relaxed font-light text-lg">
+                        For maximum results, we recommend performing the complete hair ritual at least 2-3 times a week.
+                    </div>
+                </div>
             </div>
         </div>
     </section>
