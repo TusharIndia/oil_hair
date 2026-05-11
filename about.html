@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html class="js" lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, maximum-scale=5.0">
+    <title>Our Story | Mkagrofresh - Premium Spices & Fresh Produce</title>
+    <meta name="description" content="Discover the story of Mkagrofresh. Our journey from farm to table, bringing you 100% pure, natural, and authentic spices.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'outfit': ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary': '#FFB000',
+                        'primary-dark': '#e69e00',
+                        'accent': '#D9381E',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* ==========================================================================
+           CORE VARIABLES & RESET (Mkagrofresh Branding)
+           ========================================================================== */
+        :root {
+            --primary-color: #FFB000; /* Saffron Gold */
+            --primary-dark: #e69e00;
+            --accent-color: #D9381E; /* Paprika Red */
+            --bg-color: #fcfcfc;
+            --text-main: #2c3e50;
+            --text-light: #7f8c8d;
+            --border-light: #eaeaea;
+            --font-family: 'Outfit', sans-serif;
+            --announcement-bar-height: 40px;
+            --header-height: 80px;
+            --container-max-width: 1400px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-family);
+        }
+
+        body {
+            background: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; display: inline-block; }
+        ul { list-style: none; }
+        img { max-width: 100%; height: auto; display: block; }
+        button { cursor: pointer; border: none; outline: none; font-family: inherit; }
+        
+        .container {
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* ==========================================================================
+           HEADER & ANNOUNCEMENT BAR
+           ========================================================================== */
+        .announcement-bar {
+            background-color: var(--primary-color);
+            color: #000;
+            text-align: center;
+            padding: 10px 15px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .header {
+            background: #ffffff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .custom_header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 40px;
+        }
+
+        .custom-logo-container a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 36px;
+            font-weight: 800;
+            color: #000;
+            letter-spacing: -0.5px;
+        }
+        .custom-logo-container img { width: 56px; height: 56px; object-fit: contain; }
+
+        .custom_search_nav {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .custom_group_nav ul {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .custom_group_nav a {
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--text-main);
+            transition: color 0.3s;
+        }
+
+        .custom_group_nav a:hover { color: var(--primary-color); }
+
+        .custom-header-icon-layout {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header_icn { 
+            width: 28px; 
+            height: 28px; 
+            stroke: var(--text-main); 
+            overflow: visible !important;
+        }
+        
+        .DoctorConsultationWrapper {
+            background: var(--primary-color);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.3s;
+        }
+        .DoctorConsultationWrapper:hover { background: var(--primary-dark); }
+
+
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+        .mobile-menu-toggle svg {
+            width: 32px;
+            height: 32px;
+            stroke: var(--text-main);
+            stroke-width: 2.5;
+        }
+
+        /* Mobile Nav Menu */
+        /* --- Mobile Navigation and Header Styling --- */
+        .mobile-nav-overlay {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 80%;
+            max-width: 350px;
+            height: 100%;
+            background: #ffffff;
+            z-index: 2000;
+            transition: left 0.3s ease;
+            padding: 40px 25px;
+            box-shadow: 10px 0 30px rgba(0,0,0,0.1);
+        }
+        .mobile-nav-overlay.active { left: 0; }
+        .mobile-nav-close { position: absolute; top: 15px; right: 15px; cursor: pointer; color: var(--text-main); }
+        .mobile-nav-links { list-style: none; padding: 0; margin-top: 30px; }
+        .mobile-nav-links li { margin-bottom: 25px; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px; }
+        .mobile-nav-links a { font-size: 18px; font-weight: 700; color: var(--text-main); text-transform: uppercase; }
+
+        .nav-overlay-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1999;
+            display: none;
+        }
+        .nav-overlay-bg.active {
+            display: block;
+        }
+
+        @media (max-width: 1024px) {
+            .mobile-menu-toggle { display: block; }
+            .custom_search_nav { display: none; }
+        }
+
+        @media (max-width: 768px) {
+            .custom_header { 
+                padding: 12px 10px; 
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 10px;
+            }
+            .mobile-menu-toggle { display: flex; align-items: center; flex-shrink: 0; }
+            .custom-logo-container { flex: 1; text-align: left; min-width: 0; }
+            .custom-logo-container a { font-size: clamp(14px, 4.5vw, 22px); gap: clamp(4px, 1.5vw, 8px); justify-content: flex-start; white-space: nowrap; }
+            .custom-logo-container img { width: clamp(32px, 8vw, 44px); height: clamp(32px, 8vw, 44px); object-fit: contain; flex-shrink: 0; }
+            .custom-header-icon-layout { display: flex; justify-content: flex-end; gap: clamp(8px, 2vw, 15px); padding-right: 5px; flex-shrink: 0; }
+            .header_icn { width: 24px; height: 24px; }
+            
+            .announcement-bar { font-size: 11px; padding: 8px 10px; }
+            
+            .quick_delivery_wrapper ul { display: none; }
+            .QuickDilivertyViewWrapper { padding: 5px 0; }
+            
+            .support_col ul { grid-template-columns: 1fr; gap: 20px; }
+            .support_col li { border-right: none; border-bottom: 1px solid #505050; padding-bottom: 15px; }
+            .DoctorConsultationWrapper { display: none; }
+
+            .footer__block-list { flex-direction: column; text-align: center; gap: 40px; }
+            .footer_grid { width: 100%; }
+            .social-icons { justify-content: center; }
+            .footer-block__heading::after { left: 50%; transform: translateX(-50%); }
+        }
+
+        /* ==========================================================================
+           FOOTER
+           ========================================================================== */
+        .shopify-section-group-footer-group {
+            background: #232f3e;
+            color: #ffffff;
+        }
+        
+        .footer_support_wrapper {
+            border-bottom: 1px solid #505050;
+            padding: 40px 40px;
+        }
+        .support_col ul {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            text-align: center;
+            gap: 20px;
+        }
+        .support_col li { 
+            border-right: 1px solid #505050; 
+            padding: 10px 0;
+        }
+        .support_col li:last-child { border-right: none; }
+        .support_col h3 { font-size: 18px; font-weight: 700; color: #ffffff; margin-bottom: 5px; }
+        .support_col p { font-size: 14px; color: #cccccc; }
+        
+        .custom_footer { padding: 60px 40px; }
+        .footer__block-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: space-between;
+        }
+        .footer_grid { flex: 1; min-width: 200px; }
+        .footer-block__heading { 
+            font-size: 18px; 
+            margin-bottom: 25px; 
+            color: #ffffff; 
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--primary-color);
+            display: inline-block;
+            padding-bottom: 8px;
+            font-weight: 700;
+        }
+        .footer_grid ul { list-style: none; }
+        .footer_grid ul li { margin-bottom: 15px; }
+        .footer_grid a { color: #cccccc; transition: all 0.3s; font-size: 15px; text-decoration: none; display: inline-block; }
+        .footer_grid a:hover { color: var(--primary-color); padding-left: 5px; }
+        .footer_grid p { color: #cccccc; font-size: 15px; margin-bottom: 12px; line-height: 1.6;}
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+        .social-icons a:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        .social-icons svg { width: 18px; height: 18px; fill: currentColor; }
+
+        .keyword_wrapper {
+            background: #131a22;
+            padding: 60px 40px;
+            border-top: 1px solid #111;
+        }
+        .keyword_row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+        .keyword_row .title {
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            border-bottom: 1px solid #505050;
+            padding-bottom: 10px;
+            display: block;
+        }
+        .keyword_row .description {
+            color: #95a5a6;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .footer_content_bottom {
+            text-align: center;
+            padding: 25px 0;
+            background: #0d141a;
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+
+        /* ==========================================================================
+           RESPONSIVE DESIGN
+           ========================================================================== */
+        @media (max-width: 1024px) {
+            .mobile-menu-toggle { display: block; }
+            .custom_search_nav { display: none; }
+        }
+        @media (max-width: 768px) {
+            .custom_header { 
+                padding: 12px 10px; 
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 10px;
+            }
+            .mobile-menu-toggle { display: flex; align-items: center; flex-shrink: 0; }
+            .custom-logo-container { flex: 1; text-align: left; min-width: 0; }
+            .custom-logo-container a { font-size: clamp(14px, 4.5vw, 22px); gap: clamp(4px, 1.5vw, 8px); justify-content: flex-start; white-space: nowrap; }
+            .custom-logo-container img { width: clamp(32px, 8vw, 44px); height: clamp(32px, 8vw, 44px); object-fit: contain; flex-shrink: 0; }
+            .custom-header-icon-layout { display: flex; justify-content: flex-end; gap: clamp(8px, 2vw, 15px); padding-right: 5px; flex-shrink: 0; }
+            .header_icn { width: 24px; height: 24px; }
+            
+            .announcement-bar { font-size: 11px; padding: 8px 10px; }
+            
+            .support_col ul { grid-template-columns: 1fr; gap: 20px; }
+            .support_col li { border-right: none; border-bottom: 1px solid #505050; padding-bottom: 15px; }
+            .DoctorConsultationWrapper { display: none; }
+
+            .QuickDilivertyViewWrapper { padding: 5px 0; }
+            .quick_delivery_wrapper ul { display: none; }
+
+            .footer__block-list { flex-direction: column; text-align: center; gap: 40px; }
+            .footer_grid { width: 100%; }
+            .social-icons { justify-content: center; }
+            .keyword_row { grid-template-columns: 1fr; gap: 30px; }
+        }
+    </style>
+</head>
+<body class="font-outfit bg-gray-50 text-gray-800 leading-relaxed overflow-x-hidden">
+
+    <!-- Announcement Bar -->
+    <aside class="shopify-section--announcement-bar">
+        <div class="announcement-bar">
+            <p>100% Pure & Natural Spices • Farm to Table • Vocal for Local</p>
+        </div>
+    </aside>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container custom_header">
+            <div class="mobile-menu-toggle" id="menuToggle">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </div>
+
+            <div class="custom-logo-container">
+                <a href="popop.html">
+                    <img src="mkagrofresh_logo.png" alt="MKAGROFRESH Logo">
+                    MKAGROFRESH
+                </a>
+            </div>
+            
+            <div class="custom_search_nav">
+                <nav class="custom_group_nav">
+                    <ul>
+                        <li><a href="popop.html">Home</a></li>
+                        <li><a href="#">Premium Spices</a></li>
+                        <li><a href="about.html" style="color: var(--primary-color);">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="custom-header-icon-layout">
+                <a class="DoctorConsultationWrapper" href="bulk-enquiry.html">
+                    Bulk Enquiry & Franchise
+                </a>
+                <a href="https://wa.me/your-number" class="header__icon" target="_blank" aria-label="WhatsApp">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="header_icn">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                      <path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" />
+                      <path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1" />
+                    </svg>
+                </a>
+                <a href="#" class="header__icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="header_icn"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                </a>
+                <a href="#" class="header__icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="header_icn"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L22 6H6"></path></svg>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Nav Slide-in -->
+    <div class="nav-overlay-bg" id="navOverlayBg"></div>
+    <div class="mobile-nav-overlay" id="mobileNav">
+        <div class="mobile-nav-close" id="menuClose">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </div>
+        <ul class="mobile-nav-links">
+            <li><a href="popop.html">Home</a></li>
+            <li><a href="#">Premium Spices</a></li>
+            <li><a href="about.html" style="color: var(--primary-color);">About Us</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="bulk-enquiry.html" style="color: var(--primary-color);">Bulk Enquiry & Franchise</a></li>
+        </ul>
+    </div>
+
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative h-96 md:h-[500px] flex items-center justify-center bg-black overflow-hidden mb-10">
+            <img src="about_legacy_mill_1778504795599.png" alt="MK Agro Farm" class="absolute inset-0 w-full h-full object-cover opacity-50">
+            <div class="relative z-10 text-center text-white px-5 max-w-4xl">
+                <h1 class="text-4xl md:text-6xl font-black mb-4">The Soul of Authentic Spice</h1>
+                <p class="text-lg md:text-xl">From our farms in Maharashtra to your kitchen—bringing tradition, purity, and legacy to every meal</p>
+            </div>
+        </section>
+
+        <!-- Who We Are Section -->
+        <section class="max-w-7xl mx-auto px-5 py-20">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl md:text-5xl font-black mb-6 text-gray-800">Who We Are?</h2>
+                    <p class="text-lg text-gray-600 mb-4 leading-relaxed">MK Agro Farms was born from a simple vision: to bring back the authentic taste of homemade spices to every Indian kitchen. For generations, our family has cultivated the finest spices from the fertile lands of Maharashtra using sustainable farming practices.</p>
+                    <p class="text-lg text-gray-600 mb-4 leading-relaxed">We believe in the "Vocal for Local" mission and work directly with 500+ local farmers to ensure zero-pesticide, 100% pure produce. Every batch undergoes 24 rigorous laboratory tests to guarantee quality and purity.</p>
+                    <p class="text-lg text-gray-600 leading-relaxed">Our commitment to excellence has made Mkagrofresh the trusted choice for families seeking authentic, unadulterated spices across India and beyond.</p>
+                </div>
+                <div class="rounded-3xl overflow-hidden shadow-2xl border-8 border-primary border-opacity-20">
+                    <img src="about_sustainable_farming_1778505079368.png" alt="Our Farm" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Journey Section -->
+        <section class="bg-gradient-to-br from-primary to-primary-dark text-black py-20 my-10">
+            <div class="max-w-7xl mx-auto px-5">
+                <h2 class="text-4xl md:text-5xl font-black mb-12 text-center">Our Journey</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white bg-opacity-20 p-8 rounded-2xl backdrop-blur-sm">
+                        <div class="text-5xl font-black mb-4">🌾</div>
+                        <h3 class="text-2xl font-bold mb-3">Sustainable Farming</h3>
+                        <p class="leading-relaxed">We partner with 500+ local farmers using regenerative agriculture and zero-pesticide methods to protect both your health and our environment.</p>
+                    </div>
+                    <div class="bg-white bg-opacity-20 p-8 rounded-2xl backdrop-blur-sm">
+                        <div class="text-5xl font-black mb-4">⚙️</div>
+                        <h3 class="text-2xl font-bold mb-3">Precision Processing</h3>
+                        <p class="leading-relaxed">Our slow-grinding techniques preserve natural oils and nutrients, ensuring every pinch is as aromatic and flavorful as freshly made spices.</p>
+                    </div>
+                    <div class="bg-white bg-opacity-20 p-8 rounded-2xl backdrop-blur-sm">
+                        <div class="text-5xl font-black mb-4">🔬</div>
+                        <h3 class="text-2xl font-bold mb-3">Quality Assurance</h3>
+                        <p class="leading-relaxed">Every batch undergoes 24 rigorous lab tests for lead, artificial colors, and preservatives—guaranteeing 100% pure, natural spices.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery/Heritage Section -->
+        <section class="max-w-7xl mx-auto px-5 py-20">
+            <h2 class="text-4xl md:text-5xl font-black mb-12 text-center text-gray-800">Our Heritage</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-10">
+                <!-- Large Highlight -->
+                <div class="relative bg-black rounded-3xl overflow-hidden min-h-[600px] md:row-span-2">
+                    <img src="about_legacy_mill_1778504795599.png" alt="Legacy" class="w-full h-full object-cover opacity-70 transition-all duration-500 hover:scale-105 hover:opacity-50">
+                    <div class="absolute inset-0 p-10 flex flex-col justify-end z-10 pointer-events-none">
+                        <h2 class="text-4xl md:text-5xl font-black text-white leading-tight mb-3 drop-shadow-2xl">The Heritage <br>of Grinding</h2>
+                        <p class="text-base md:text-lg font-medium text-white opacity-90 drop-shadow-xl">We preserve the slow-grinding techniques that keep natural oils intact, ensuring every pinch is as aromatic as homemade spice.</p>
+                    </div>
+                </div>
+
+                <!-- Small Highlight 1 -->
+                <div class="relative bg-black rounded-3xl overflow-hidden min-h-[300px]">
+                    <img src="about_sustainable_farming_1778505079368.png" alt="Farming" class="w-full h-full object-cover opacity-70 transition-all duration-500 hover:scale-105 hover:opacity-50">
+                    <div class="absolute inset-0 p-10 flex flex-col justify-end z-10 pointer-events-none">
+                        <h2 class="text-3xl md:text-4xl font-black text-white leading-tight mb-3 drop-shadow-2xl">Sustainable <br>Farming</h2>
+                        <p class="text-base font-medium text-white opacity-90 drop-shadow-xl">Working directly with 500+ local farmers to ensure zero-pesticide produce.</p>
+                    </div>
+                </div>
+
+                <!-- Small Highlight 2 -->
+                <div class="relative bg-black rounded-3xl overflow-hidden min-h-[300px]">
+                    <img src="about_quality_lab_1778505092798.png" alt="Quality" class="w-full h-full object-cover opacity-70 transition-all duration-500 hover:scale-105 hover:opacity-50">
+                    <div class="absolute inset-0 p-10 flex flex-col justify-end z-10 pointer-events-none">
+                        <h2 class="text-3xl md:text-4xl font-black text-white leading-tight mb-3 drop-shadow-2xl">Precision <br>Purity</h2>
+                        <p class="text-base font-medium text-white opacity-90 drop-shadow-xl">Every batch undergoes 24 rigorous lab tests for lead and artificial colors.</p>
+                    </div>
+                </div>
+
+                <!-- Wide Highlight -->
+                <div class="relative bg-black rounded-3xl overflow-hidden min-h-[400px] md:col-span-2">
+                    <img src="about_community_farmers_1778505107535.png" alt="Community" class="w-full h-full object-cover opacity-70 transition-all duration-500 hover:scale-105 hover:opacity-50">
+                    <div class="absolute inset-0 p-10 flex flex-col justify-end z-10 pointer-events-none">
+                        <h2 class="text-4xl md:text-5xl font-black text-white leading-tight mb-3 drop-shadow-2xl">Empowering Our Community</h2>
+                        <p class="text-lg font-medium text-white opacity-90 drop-shadow-xl">We believe in the "Vocal for Local" mission, supporting the livelihoods of the hands that feed the nation.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Meet Our Founders Section -->
+        <section class="max-w-7xl mx-auto px-5 py-20 border-t-2 border-gray-200">
+            <h2 class="text-4xl md:text-5xl font-black mb-12 text-center text-gray-800">Meet Our Founders</h2>
+            <p class="text-center text-xl text-gray-600 mb-16 max-w-3xl mx-auto">The visionaries behind MK Agro Farms, driven by passion for purity and commitment to excellence</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-3xl p-8 shadow-2xl text-center">
+                    <div class="w-40 h-40 mx-auto mb-6 bg-gradient-to-br from-primary to-primary-dark rounded-3xl flex items-center justify-center text-5xl font-black text-white">MK</div>
+                    <h3 class="text-2xl font-bold mb-2 text-gray-800">Founder & Visionary</h3>
+                    <p class="text-gray-600 mb-4">With over 30 years of experience in agriculture and spice processing, founding MK Agro with a mission to revolutionize the spice industry through purity and transparency.</p>
+                    <div class="flex justify-center gap-4 text-gray-700">
+                        <a href="#" class="hover:text-primary transition">🔗</a>
+                    </div>
+                </div>
+                <div class="bg-white rounded-3xl p-8 shadow-2xl text-center">
+                    <div class="w-40 h-40 mx-auto mb-6 bg-gradient-to-br from-primary to-primary-dark rounded-3xl flex items-center justify-center text-5xl font-black text-white">AG</div>
+                    <h3 class="text-2xl font-bold mb-2 text-gray-800">Operations Lead</h3>
+                    <p class="text-gray-600 mb-4">Expert in sustainable farming practices and farmer relations, ensuring our supply chain maintains the highest standards of quality and ethics.</p>
+                    <div class="flex justify-center gap-4 text-gray-700">
+                        <a href="#" class="hover:text-primary transition">🔗</a>
+                    </div>
+                </div>
+                <div class="bg-white rounded-3xl p-8 shadow-2xl text-center">
+                    <div class="w-40 h-40 mx-auto mb-6 bg-gradient-to-br from-primary to-primary-dark rounded-3xl flex items-center justify-center text-5xl font-black text-white">RO</div>
+                    <h3 class="text-2xl font-bold mb-2 text-gray-800">Quality & Innovation</h3>
+                    <p class="text-gray-600 mb-4">Leading our R&D and quality assurance teams, guaranteeing every product meets our rigorous 24-test laboratory standards.</p>
+                    <div class="flex justify-center gap-4 text-gray-700">
+                        <a href="#" class="hover:text-primary transition">🔗</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer (Restyled to match the dark, rich grid layout) -->
+    <footer class="shopify-section-group-footer-group">
+        <!-- Footer Support Top -->
+        <div class="footer_support_wrapper container">
+            <div class="support_col">
+                <ul>
+                    <li>
+                        <h3>100% Pure</h3>
+                        <p>No Artificial Colors or Preservatives</p>
+                    </li>
+                    <li>
+                        <h3>Farm to Table</h3>
+                        <p>Sourced directly from local farmers</p>
+                    </li>
+                    <li>
+                        <h3>Have Queries?</h3>
+                        <p>support@mkagrofresh.com</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main Footer Links -->
+        <div class="custom_footer container">
+            <div class="footer__block-list">
+                <div class="footer_grid">
+                    <h2 class="footer-block__heading">Quick Links</h2>
+                    <ul>
+                        <li><a href="#">Shop Spices</a></li>
+                        <li><a href="#">Fresh Vegetables</a></li>
+                        <li><a href="#">Bulk Orders (B2B)</a></li>
+                        <li><a href="#">Track Order</a></li>
+                    </ul>
+                </div>
+                <div class="footer_grid">
+                    <h2 class="footer-block__heading">Our Policies</h2>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Refund Policy</a></li>
+                        <li><a href="#">Shipping Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer_grid">
+                    <h2 class="footer-block__heading">Contact Us</h2>
+                    <p>MK Agro Farms & Processing</p>
+                    <p>Ambajogai, Maharashtra, India</p>
+                    <p>info@mkagrofresh.com</p>
+                    <p>+91 98765 43210</p>
+                    
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3.6l.4-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+                        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                        <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></a>
+                        <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEO Keywords Section -->
+        <div class="keyword_wrapper">
+            <div class="container keyword_row">
+                <div>
+                    <div class="title">Mkagrofresh: The Soul of Authentic Spice</div>
+                    <div class="description">Ignite your culinary passion with MK Agro’s Apsara Range. We bring you the finest sun-dried chillies and turmeric, crafted to deliver legendary regional tastes. Our products are the secret ingredient your kitchen has been waiting for.</div>
+                </div>
+                <div>
+                    <div class="title">Our USP: 100% Pure & Natural</div>
+                    <div class="description">We believe in honesty on your plate. Our spices contain no artificial colors, no lead chromate, and no preservatives. You get 100% pure roots and chillies in every pinch.</div>
+                </div>
+                <div>
+                    <div class="title">The "Ghar-Guti" Touch</div>
+                    <div class="description">Crafted to replicate the taste of homemade spices, providing that nostalgic, rich flavor that reminds you of traditional cooking. We proudly support the "Vocal for Local" initiative.</div>
+                </div>
+                <div>
+                    <div class="title">Popular Categories</div>
+                    <div class="description">Apsara Red Chilli Powder | Special Blend Turmeric | Farm Fresh Vegetables | Organic Pulses | Bulk Spices | Natural Ingredients</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer_content_bottom">
+            <div class="container">
+                <small>© 2026 - Mkagrofresh | MK Agro Farms & Processing. All Rights Reserved.</small>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Logic
+        const menuToggle = document.getElementById('menuToggle');
+        const menuClose = document.getElementById('menuClose');
+        const mobileNav = document.getElementById('mobileNav');
+        const navOverlayBg = document.getElementById('navOverlayBg');
+
+        menuToggle.addEventListener('click', () => {
+            mobileNav.classList.add('active');
+            navOverlayBg.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        const closeMenu = () => {
+            mobileNav.classList.remove('active');
+            navOverlayBg.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        };
+
+        menuClose.addEventListener('click', closeMenu);
+        navOverlayBg.addEventListener('click', closeMenu);
+    </script>
+</body>
+</html>

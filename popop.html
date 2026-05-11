@@ -16,9 +16,9 @@
            CORE VARIABLES & RESET (Mkagrofresh Branding)
            ========================================================================== */
         :root {
-            --primary-color: #2ecc71; /* Fresh Green */
-            --primary-dark: #27ae60;
-            --accent-color: #e74c3c; /* Chilli Red */
+            --primary-color: #FFB000; /* Saffron Gold */
+            --primary-dark: #e69e00;
+            --accent-color: #D9381E; /* Paprika Red */
             --bg-color: #fcfcfc;
             --text-main: #2c3e50;
             --text-light: #7f8c8d;
@@ -58,12 +58,12 @@
            HEADER & ANNOUNCEMENT BAR
            ========================================================================== */
         .announcement-bar {
-            background-color: var(--primary-dark);
-            color: white;
+            background-color: var(--primary-color);
+            color: #000;
             text-align: center;
             padding: 10px 15px;
             font-size: 13px;
-            font-weight: 600;
+            font-weight: 700;
             letter-spacing: 1px;
             text-transform: uppercase;
         }
@@ -87,12 +87,12 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: 24px;
+            font-size: 36px;
             font-weight: 800;
-            color: var(--primary-dark);
+            color: #000;
             letter-spacing: -0.5px;
         }
-        .custom-logo-container svg { width: 32px; height: 32px; fill: var(--primary-color); }
+        .custom-logo-container img { width: 56px; height: 56px; object-fit: contain; }
 
         .custom_search_nav {
             flex: 1;
@@ -125,8 +125,8 @@
         }
 
         .header_icn { 
-            width: 24px; 
-            height: 24px; 
+            width: 28px; 
+            height: 28px; 
             stroke: var(--text-main); 
             overflow: visible !important;
         }
@@ -152,9 +152,10 @@
             padding: 5px;
         }
         .mobile-menu-toggle svg {
-            width: 28px;
-            height: 28px;
+            width: 32px;
+            height: 32px;
             stroke: var(--text-main);
+            stroke-width: 2.5;
         }
 
         /* Mobile Nav Menu */
@@ -232,25 +233,35 @@
         /* ==========================================================================
            HERO SECTION & BANNERS
            ========================================================================== */
-        .hero-section { 
-            position: relative; 
-            width: 100%; 
-            margin-bottom: 0; 
-        }
-        .slider_banner { 
-            width: 100%; 
+        .hero-section {
+            position: relative;
+            overflow: hidden;
             background: #000;
+            margin-bottom: 0;
+            width: 100%;
         }
-        .bannerSlider { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; }
-        .bannerSlider::-webkit-scrollbar { display: none; }
-        .bannerSlider li { flex: 0 0 100%; scroll-snap-align: start; }
-        .slider_banner img { 
-            width: 100%; 
-            height: 550px; 
-            object-fit: cover; 
-            opacity: 0.7;
+        .hero-slider {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            height: 600px;
         }
-        .slider_banner::after {
+        .hero-slider::-webkit-scrollbar { display: none; }
+        .hero-slide {
+            flex: 0 0 100%;
+            position: relative;
+            scroll-snap-align: center;
+            height: 100%;
+        }
+        .hero-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+        }
+        .hero-slide::after {
             content: '';
             position: absolute;
             top: 0;
@@ -260,46 +271,134 @@
             background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.6));
             z-index: 1;
         }
-
-        .hero-overlay {
+        .hero-content {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
             color: white;
-            width: 90%;
-            max-width: 800px;
+            width: 85%;
             z-index: 10;
         }
-        .hero-overlay h1 { 
-            font-size: 48px; 
+        .hero-content h1 { 
+            font-size: clamp(32px, 8vw, 56px); 
             font-weight: 800; 
-            margin-bottom: 15px; 
-            line-height: 1.2; 
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        }
-        .hero-overlay p { 
-            font-size: 20px; 
-            margin-bottom: 30px; 
-            font-weight: 500;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
-        }
-        .hero-overlay .btn-primary {
-            background: var(--primary-color);
-            color: white;
-            padding: 16px 36px;
-            border-radius: 30px;
-            font-size: 16px;
-            font-weight: 700;
+            margin-bottom: 10px; 
+            line-height: 1.1; 
+            text-shadow: 0 2px 15px rgba(0,0,0,0.5);
             text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.4);
         }
-        .hero-overlay .btn-primary:hover { 
-            background: var(--primary-dark); 
-            transform: translateY(-2px);
+        .hero-content p { 
+            font-size: clamp(18px, 5vw, 28px); 
+            font-weight: 600;
+            color: var(--primary-color);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+        .hero-description {
+            font-size: clamp(14px, 4vw, 18px);
+            font-weight: 400;
+            color: rgba(255,255,255,0.9);
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+        }
+
+        /* Slider Base Styles */
+        .related-pro { margin: 60px auto 0; }
+        .owl-stage-outer { overflow: hidden; width: 100%; }
+        .owl-stage {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            gap: 20px;
+            padding: 20px 5px;
+            scroll-behavior: smooth;
+        }
+        .owl-stage::-webkit-scrollbar { display: none; }
+        .owl-item {
+            flex: 0 0 calc(25% - 15px);
+            scroll-snap-align: start;
+            min-width: 0;
+        }
+
+        /* Coupon Section Styles */
+        .coupons-section {
+            background: #1a1a1a;
+            padding: 80px 0;
+            margin: 0;
+            color: white;
+            overflow: hidden;
+        }
+        .coupon-slider {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            gap: 20px;
+            padding: 20px 15px;
+        }
+        .coupon-slider::-webkit-scrollbar { display: none; }
+        .coupon-card {
+            flex: 0 0 100%;
+            scroll-snap-align: center;
+            background: linear-gradient(135deg, #2c3e50, #000);
+            border: 2px dashed var(--primary-color);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 250px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .coupon-card h2 { 
+            font-size: 42px; 
+            font-weight: 800; 
+            color: var(--primary-color); 
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        .coupon-card p { 
+            font-size: 20px; 
+            font-weight: 500; 
+            color: #ccc; 
+            margin-bottom: 20px;
+        }
+        .coupon-code {
+            background: rgba(255, 176, 0, 0.1);
+            border: 1px solid var(--primary-color);
+            padding: 8px 24px;
+            border-radius: 30px;
+            font-family: monospace;
+            font-weight: 800;
+            color: var(--primary-color);
+            letter-spacing: 2px;
+            font-size: 18px;
+        }
+        .coupon-card::before, .coupon-card::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: #1a1a1a;
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .coupon-card::before { left: -22px; }
+        .coupon-card::after { right: -22px; }
+
+        @media (min-width: 1024px) {
+            .coupon-card { flex: 0 0 calc(50% - 20px); }
         }
 
         /* ==========================================================================
@@ -327,21 +426,26 @@
             position: absolute;
             left: 0;
             bottom: -12px;
-            width: 60px;
-            height: 4px;
-            background: var(--primary-color);
+            width: 100%;
+            height: 3px;
+            background: #ffcc00;
             border-radius: 2px;
         }
         .view_all a {
-            font-size: 15px;
-            font-weight: 600;
-            color: var(--primary-dark);
+            font-size: 13px;
+            font-weight: 700;
+            color: #000;
+            border: 1px solid #ffcc00;
+            padding: 6px 16px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            text-decoration: none;
             display: flex;
             align-items: center;
             gap: 5px;
             transition: 0.3s;
         }
-        .view_all a:hover { color: var(--text-main); }
+        .view_all a:hover { background: #fffcf0; }
 
         /* The Magic Native Slider */
         .feature_slider { display: block; }
@@ -361,6 +465,23 @@
             flex: 0 0 calc(25% - 15px) !important;
             width: auto !important;
             scroll-snap-align: start;
+        }
+        
+        .custom-slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 15px;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .dot.active {
+            background-color: #000;
         }
 
         /* ==========================================================================
@@ -458,30 +579,43 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.08);
             transform: translateY(-5px);
         }
+        
+        .product_card {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+        }
+        .product_card > a {
+            display: block;
+            width: 100%;
+        }
 
         .sale_badges_wrapper {
             position: absolute;
-            top: 15px;
-            left: 15px;
+            top: 0;
+            left: 0;
             z-index: 10;
         }
         .sale_badge {
-            background: var(--accent-color);
+            background: #D9381E;
             color: white;
-            padding: 5px 10px;
-            font-size: 11px;
-            font-weight: 700;
+            padding: 4px 10px;
             border-radius: 4px;
+            font-size: 11px;
+            font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            box-shadow: 0 2px 5px rgba(217, 56, 30, 0.3);
         }
 
         .product-card__image {
             width: 100% !important;
-            height: 260px !important; /* Strictly enforce height */
-            object-fit: cover !important; /* Ensure box is covered */
-            border-radius: 0 !important;
+            height: 220px !important; 
+            object-fit: cover !important; 
+            border-radius: 8px 8px 0 0 !important;
             display: block !important;
+            background: #fffcf0;
         }
 
         .product_info {
@@ -489,27 +623,28 @@
             flex-direction: column;
             flex: 1;
             text-align: center;
-            padding: 20px; /* Added padding here since card padding is 0 */
+            padding: 15px; 
         }
 
         .product_title {
-            font-size: 17px;
-            font-weight: 700;
+            font-size: 14px;
+            font-weight: 800;
             color: var(--text-main);
-            margin-bottom: 8px;
-            line-height: 1.3;
+            margin-bottom: 6px;
+            line-height: 1.4;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            min-height: 44px; /* Ensure consistent spacing even for 1-line titles */
+            min-height: 40px; 
         }
 
         .productsub_title a {
-            font-size: 13px;
-            color: var(--text-light);
+            font-size: 12px;
+            color: #D9381E;
             display: block;
             margin-bottom: 10px;
+            font-weight: 700;
         }
 
         .review_rating_wrapper {
@@ -518,55 +653,50 @@
             justify-content: center;
             gap: 5px;
             margin-bottom: 15px;
-            font-size: 13px;
-            color: #f39c12;
-            font-weight: 600;
+            font-size: 12px;
+            color: #777;
+            font-weight: 500;
         }
 
         .price-list {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             margin-top: auto;
             margin-bottom: 15px;
         }
-        .text-on-sale { font-size: 18px; font-weight: 800; color: var(--primary-dark); }
-        .text-subdued { font-size: 14px; text-decoration: line-through; color: #aaa; }
-        .custom_discount-bsl { font-size: 12px; color: var(--accent-color); font-weight: 700; background: #fdf2f0; padding: 2px 6px; border-radius: 4px;}
+        .text-on-sale { font-size: 18px; font-weight: 800; color: #000; }
+        .text-subdued { font-size: 14px; text-decoration: line-through; color: #777; }
+        .custom_discount-bsl { font-size: 11px; color: white; font-weight: 700; background: #D9381E; padding: 2px 6px; border-radius: 4px;}
 
         .atc_button {
             margin-top: 5px;
         }
         .atc_button button {
             width: 100%;
-            padding: 14px;
             background: var(--primary-color);
-            color: white;
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 15px;
+            color: #000;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            box-shadow: 0 4px 12px rgba(46, 204, 113, 0.2);
-        }
-        .atc_button button::before {
-            content: '+';
-            font-size: 20px;
-            font-weight: 400;
+            box-shadow: 0 4px 10px rgba(255, 176, 0, 0.2);
         }
         .atc_button button:hover {
             background: var(--primary-dark);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(46, 204, 113, 0.4);
+            box-shadow: 0 6px 15px rgba(255, 176, 0, 0.3);
         }
         .atc_button button:active {
-            transform: translateY(0);
+            transform: translateY(1px);
         }
 
         /* ==========================================================================
@@ -675,46 +805,77 @@
         @media (max-width: 768px) {
             .custom_header { 
                 padding: 12px 10px; 
-                display: grid;
-                grid-template-columns: 1fr auto 1fr;
+                display: flex;
                 align-items: center;
+                justify-content: space-between;
+                gap: 10px;
             }
-            .mobile-menu-toggle { grid-column: 1; display: flex; align-items: center; }
-            .custom-logo-container { grid-column: 2; text-align: center; }
-            .custom-logo-container a { font-size: 16px; gap: 4px; justify-content: center; }
-            .custom-logo-container svg { width: 20px; height: 20px; }
-            .custom-header-icon-layout { grid-column: 3; display: flex; justify-content: flex-end; gap: 15px; padding-right: 5px; }
-            .header_icn { width: 20px; height: 20px; }
+            .mobile-menu-toggle { display: flex; align-items: center; flex-shrink: 0; }
+            .custom-logo-container { flex: 1; text-align: left; min-width: 0; }
+            .custom-logo-container a { font-size: clamp(14px, 4.5vw, 22px); gap: clamp(4px, 1.5vw, 8px); justify-content: flex-start; white-space: nowrap; }
+            .custom-logo-container img { width: clamp(32px, 8vw, 44px); height: clamp(32px, 8vw, 44px); object-fit: contain; flex-shrink: 0; }
+            .custom-header-icon-layout { display: flex; justify-content: flex-end; gap: clamp(8px, 2vw, 15px); padding-right: 5px; flex-shrink: 0; }
+            .header_icn { width: 24px; height: 24px; }
             
             .announcement-bar { font-size: 11px; padding: 8px 10px; }
             
-            .owl-item { flex: 0 0 calc(60% - 15px) !important; }
+            .owl-item { 
+                flex: 0 0 calc(50% - 10px) !important; 
+                width: calc(50% - 10px) !important;
+                max-width: calc(50% - 10px) !important;
+                min-width: 0; 
+                scroll-snap-align: center;
+            }
+            .owl-stage { gap: 20px; }
+            .product-card__image { height: 160px !important; padding: 0 !important; }
+            .product_info { padding: 10px; }
+            .product_title { font-size: 13px; min-height: 38px; line-height: 1.3; margin-bottom: 4px; }
+            .productsub_title a { font-size: 11px; margin-bottom: 6px; }
+            .review_rating_wrapper { font-size: 10px; margin-bottom: 8px; flex-wrap: wrap; }
+            .price-list { gap: 4px; margin-bottom: 8px; }
+            .text-on-sale { font-size: 15px; }
+            .text-subdued { font-size: 12px; }
+            .custom_discount-bsl { font-size: 9px; padding: 2px 4px; }
+            .atc_button button { font-size: 11px; padding: 10px 5px; gap: 5px; }
+            .sale_badge { font-size: 10px; padding: 3px 8px; }
+            
             .quick_delivery_wrapper ul { display: none; }
             
             .QuickDilivertyViewWrapper { padding: 5px 0; }
             .custom_mobile_collection { 
-                display: flex; 
-                overflow-x: auto; 
-                gap: 20px; 
-                padding: 20px 15px; 
-                scrollbar-width: none; 
+                display: grid; 
+                grid-template-columns: repeat(4, 1fr);
+                gap: 10px; 
+                padding: 20px 10px; 
                 background: #f8fffb;
                 border-bottom: 1px solid #e0f2e9;
             }
-            .custom_mobile_collection::-webkit-scrollbar { display: none; }
-            .custom_mobile_collection .card { flex: 0 0 90px; text-align: center; transition: transform 0.3s ease; }
+            .custom_mobile_collection .card { text-align: center; transition: transform 0.3s ease; }
             .custom_mobile_collection .card img { 
-                width: 75px; 
-                height: 75px; 
+                width: 100%; 
+                max-width: 65px; 
+                aspect-ratio: 1 / 1;
                 border-radius: 50%; 
                 object-fit: cover; 
-                margin: 0 auto 12px; 
+                margin: 0 auto 8px; 
                 border: 2px solid var(--primary-color);
                 box-shadow: 0 4px 10px rgba(46, 204, 113, 0.2);
             }
-            .custom_mobile_collection .card p { font-size: 11px; font-weight: 700; color: var(--text-main); line-height: 1.2; }
+            .custom_mobile_collection .card p { 
+                font-size: 9.5px; 
+                font-weight: 700; 
+                color: var(--text-main); 
+                line-height: 1.1; 
+                min-height: 24px; 
+                display: flex; 
+                align-items: center; 
+                justify-content: center; 
+            }
             
             .bannerSlider img { height: 350px; }
+            .hero-slider { height: 480px; }
+            .hero-content h1 { font-size: 36px; }
+            .hero-content p { font-size: 18px; }
             .hero-overlay { width: 95%; padding: 20px; transform: translate(-50%, -45%);}
             .hero-overlay h1 { font-size: 28px; margin-bottom: 12px; letter-spacing: -0.5px; }
             .hero-overlay p { font-size: 15px; margin-bottom: 25px; line-height: 1.5; opacity: 0.9;}
@@ -731,7 +892,11 @@
             .footer-block__heading::after { left: 50%; transform: translateX(-50%); }
         }
         @media (max-width: 480px) {
-            .owl-item { flex: 0 0 calc(85% - 15px) !important; }
+            .owl-item { 
+                flex: 0 0 calc(50% - 10px) !important; 
+                max-width: calc(50% - 10px) !important;
+            }
+            .owl-stage { gap: 20px; }
         }
     </style>
 </head>
@@ -748,12 +913,12 @@
     <header class="header">
         <div class="container custom_header">
             <div class="mobile-menu-toggle" id="menuToggle">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
             </div>
 
             <div class="custom-logo-container">
                 <a href="/">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2-3.5l7-7-1.41-1.41L10 13.67l-3.59-3.59L5 11.5l5 5z"/></svg>
+                    <img src="mkagrofresh_logo.png" alt="MKAGROFRESH Logo">
                     MKAGROFRESH
                 </a>
             </div>
@@ -761,23 +926,30 @@
             <div class="custom_search_nav">
                 <nav class="custom_group_nav">
                     <ul>
-                        <li><a href="#">Home</a></li>
+                        <li><a href="popop.html">Home</a></li>
                         <li><a href="#">Premium Spices</a></li>
-                        <li><a href="#">Fresh Produce</a></li>
-                        <li><a href="#">About Us</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </nav>
             </div>
 
             <div class="custom-header-icon-layout">
-                <a class="DoctorConsultationWrapper" href="#">
-                    Bulk Inquiry
+                <a class="DoctorConsultationWrapper" href="bulk-enquiry.html">
+                    Bulk Enquiry & Franchise
+                </a>
+                <a href="https://wa.me/your-number" class="header__icon" target="_blank" aria-label="WhatsApp">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="header_icn">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                      <path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" />
+                      <path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1" />
+                    </svg>
                 </a>
                 <a href="#" class="header__icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="header_icn"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="header_icn"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                 </a>
                 <a href="#" class="header__icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="header_icn"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L22 6H6"></path></svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="header_icn"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L22 6H6"></path></svg>
                 </a>
             </div>
         </div>
@@ -790,11 +962,11 @@
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </div>
         <ul class="mobile-nav-links">
-            <li><a href="#">Home</a></li>
+            <li><a href="popop.html">Home</a></li>
             <li><a href="#">Premium Spices</a></li>
-            <li><a href="#">Fresh Produce</a></li>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#" style="color: var(--primary-color);">Bulk Inquiry</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="bulk-enquiry.html" style="color: var(--primary-color);">Bulk Enquiry & Franchise</a></li>
         </ul>
     </div>
 
@@ -812,46 +984,52 @@
     <!-- Mobile Categories (Visible only on mobile) -->
     <div class="custom_mobile_collection">
         <div class="card">
-            <img src="category_spices_round_1778157980221.png" alt="Spices">
+            <img src="category_spices_round_1778157980221.png" alt="Premium Spices">
             <p>Premium Spices</p>
         </div>
         <div class="card">
-            <img src="category_produce_round_1778157999159.png" alt="Fresh">
-            <p>Fresh Produce</p>
+            <img src="category_maharashtrian_round_1778485151280.png" alt="Maharashtrian Taste">
+            <p>Authentic Maharashtrian Taste</p>
         </div>
         <div class="card">
-            <img src="category_staples_round_1778158019202.png" alt="Grains">
-            <p>Organic Staples</p>
+            <img src="category_family_packs_round_1778485167408.png" alt="Family Packs">
+            <p>Family Packs</p>
         </div>
         <div class="card">
-            <img src="category_farms_round_1778158041025.png" alt="Farm">
-            <p>Our Farms</p>
+            <img src="category_low_calorie_round_1778485184753.png" alt="Low-Calorie">
+            <p>Low-Calorie Products</p>
         </div>
     </div>
 
     <main id="main">
         <!-- Hero Banner Slider -->
         <div class="hero-section">
-            <div class="slider_banner">
-                <ul class="bannerSlider">
-                    <li><img src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80" alt="Pure Spices Collection"></li>
-                    <li><img src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80" alt="Fresh Farms"></li>
-                </ul>
-            </div>
-            <!-- Centered Text Overlay -->
-            <div class="hero-overlay">
-                <h1>100% Pure, Farm Fresh & Authentic</h1>
-                <p>Experience the soul of Indian spices and fresh agricultural produce delivered directly from local farms to your doorstep.</p>
-                <a href="#" class="btn-primary">Shop Now</a>
-            </div>
+            <ul class="hero-slider">
+                <li class="hero-slide">
+                    <img src="hero_kolhapuri_kala_masala_portrait_1778485607042.png" alt="Kolhapuri Kala Masala">
+                    <div class="hero-content">
+                        <h1>Authentic Kolhapuri Taste</h1>
+                        <p>Kala Masala</p>
+                        <div class="hero-description">Experience the legendary, dark, and aromatic spice blend of Kolhapur. Handcrafted with 32+ ingredients for that perfect "Ghar-Guti" flavor.</div>
+                    </div>
+                </li>
+                <li class="hero-slide">
+                    <img src="hero_lal_mirch_powder_portrait_1778485622434.png" alt="Lal Mirch Powder">
+                    <div class="hero-content">
+                        <h1>Pure & Spicy</h1>
+                        <p>Lal Mirch Powder</p>
+                        <div class="hero-description">Vibrant, sun-dried red chillies ground to perfection. No artificial colors, just pure heat and rich color for your daily cooking.</div>
+                    </div>
+                </li>
+            </ul>
         </div>
 
         <!-- Section 1: Premium Spices -->
         <div class="related-pro container">
             <div class="feature_slider_wrapper">
                 <div class="title">
-                    <h2>Premium Spices</h2> 
-                    <div class="view_all"><a href="#">View All &rarr;</a></div>
+                    <h2>Best Sellers</h2> 
+                    <div class="view_all"><a href="#">VIEW ALL ▶</a></div>
                 </div>
                 
                 <ul class="feature_slider">
@@ -863,14 +1041,14 @@
                                 <li class="product_card_grid">
                                     <div class="product_card">
                                         <div class="sale_badges_wrapper"><span class="sale_badge">Save ₹50</span></div>
-                                        <a href="#">
+                                        <a href="product-detail.html">
                                             <img src="red_chilli_powder_premium_1778157464342.png" alt="Apsara Red Chilli Powder" class="product-card__image">
                                         </a>
                                         <div class="product_info">
-                                            <a href="#"><h3 class="product_title">Apsara Red Chilli Powder [Asli Teekha Asli Lal]</h3></a>
-                                            <div class="productsub_title"><a href="#">Experience the Soul of Authentic Spice</a></div>
+                                            <a href="product-detail.html"><h3 class="product_title">Apsara Red Chilli Powder [Asli Teekha Asli Lal]</h3></a>
+                                            <div class="productsub_title"><a href="product-detail.html">Experience the Soul of Authentic Spice</a></div>
                                             <div class="review_rating_wrapper">
-                                                ★ 4.9 <span class="rating_count">(1.2k Reviews)</span>
+                                                <span style="color:#ffcc00">★</span> 4.9 | <span style="display:inline-flex; align-items:center; justify-content:center; width:13px; height:13px; background:#3498db; color:white; border-radius:50%; font-size:8px; margin:0 2px;">✔</span> 1.2k Reviews
                                             </div>
                                             <div class="price-list">
                                                 <span class="text-on-sale">₹250</span>
@@ -888,14 +1066,14 @@
                                 <li class="product_card_grid">
                                     <div class="product_card">
                                         <div class="sale_badges_wrapper"><span class="sale_badge" style="background:#f39c12;">Bestseller</span></div>
-                                        <a href="#">
+                                        <a href="product-detail.html">
                                             <img src="turmeric_powder_premium_1778157487336.png" alt="Apsara Turmeric Powder" class="product-card__image">
                                         </a>
                                         <div class="product_info">
-                                            <a href="#"><h3 class="product_title">Apsara Turmeric Powder (Special Blend)</h3></a>
-                                            <div class="productsub_title"><a href="#">High Curcumin Content, 100% Pure</a></div>
+                                            <a href="product-detail.html"><h3 class="product_title">Apsara Turmeric Powder (Special Blend)</h3></a>
+                                            <div class="productsub_title"><a href="product-detail.html">High Curcumin Content, 100% Pure</a></div>
                                             <div class="review_rating_wrapper">
-                                                ★ 4.8 <span class="rating_count">(850 Reviews)</span>
+                                                <span style="color:#ffcc00">★</span> 4.8 | <span style="display:inline-flex; align-items:center; justify-content:center; width:13px; height:13px; background:#3498db; color:white; border-radius:50%; font-size:8px; margin:0 2px;">✔</span> 850 Reviews
                                             </div>
                                             <div class="price-list">
                                                 <span class="text-on-sale">₹200</span>
@@ -912,14 +1090,14 @@
                             <div class="owl-item">
                                 <li class="product_card_grid">
                                     <div class="product_card">
-                                        <a href="#">
+                                        <a href="product-detail.html">
                                             <img src="coriander_powder_premium_1778157509120.png" alt="Coriander Powder" class="product-card__image">
                                         </a>
                                         <div class="product_info">
-                                            <a href="#"><h3 class="product_title">Mkagrofresh Coriander (Dhaniya) Powder</h3></a>
-                                            <div class="productsub_title"><a href="#">Freshly milled, potent aroma</a></div>
+                                            <a href="product-detail.html"><h3 class="product_title">Mkagrofresh Coriander (Dhaniya) Powder</h3></a>
+                                            <div class="productsub_title"><a href="product-detail.html">Freshly milled, potent aroma</a></div>
                                             <div class="review_rating_wrapper">
-                                                ★ 4.7 <span class="rating_count">(400 Reviews)</span>
+                                                <span style="color:#ffcc00">★</span> 4.7 | <span style="display:inline-flex; align-items:center; justify-content:center; width:13px; height:13px; background:#3498db; color:white; border-radius:50%; font-size:8px; margin:0 2px;">✔</span> 400 Reviews
                                             </div>
                                             <div class="price-list">
                                                 <span class="text-on-sale">₹180</span>
@@ -936,14 +1114,14 @@
                                 <li class="product_card_grid">
                                     <div class="product_card">
                                         <div class="sale_badges_wrapper"><span class="sale_badge">Save ₹30</span></div>
-                                        <a href="#">
+                                        <a href="product-detail.html">
                                             <img src="cumin_seeds_premium_1778157527841.png" alt="Cumin Seeds" class="product-card__image">
                                         </a>
                                         <div class="product_info">
-                                            <a href="#"><h3 class="product_title">Premium Cumin (Jeera) Seeds</h3></a>
-                                            <div class="productsub_title"><a href="#">Sun-dried, authentic taste</a></div>
+                                            <a href="product-detail.html"><h3 class="product_title">Premium Cumin (Jeera) Seeds</h3></a>
+                                            <div class="productsub_title"><a href="product-detail.html">Sun-dried, authentic taste</a></div>
                                             <div class="review_rating_wrapper">
-                                                ★ 4.9 <span class="rating_count">(210 Reviews)</span>
+                                                <span style="color:#ffcc00">★</span> 4.9 | <span style="display:inline-flex; align-items:center; justify-content:center; width:13px; height:13px; background:#3498db; color:white; border-radius:50%; font-size:8px; margin:0 2px;">✔</span> 210 Reviews
                                             </div>
                                             <div class="price-list">
                                                 <span class="text-on-sale">₹320</span>
@@ -959,6 +1137,9 @@
                         </div>
                     </div>
                 </ul>
+                <div class="custom-slider-dots">
+                    <!-- Dots injected via JS -->
+                </div>
             </div>
         </div>
 
@@ -1001,11 +1182,11 @@
             </div>
         </div>
 
-        <!-- Section 2: Fresh Produce -->
+        <!-- Section 2: Authentic Maharashtrian Taste -->
         <div class="related-pro container">
             <div class="feature_slider_wrapper">
                 <div class="title">
-                    <h2>Farm Fresh Produce</h2> 
+                    <h2>Authentic Maharashtrian Taste</h2> 
                     <div class="view_all"><a href="#">View All &rarr;</a></div>
                 </div>
                 
@@ -1017,12 +1198,15 @@
                                 <li class="product_card_grid">
                                     <div class="product_card">
                                         <a href="#">
-                                            <img src="fresh_tomatoes_premium_1778157551195.png" alt="Fresh Tomatoes" class="product-card__image">
+                                            <img src="prod_goda_masala_1778486505444.png" alt="Goda Masala" class="product-card__image">
                                         </a>
                                         <div class="product_info">
-                                            <a href="#"><h3 class="product_title">Organic Red Tomatoes</h3></a>
-                                            <div class="productsub_title"><a href="#">Directly from MK Agro Farms</a></div>
-                                            <div class="price-list"><span class="text-on-sale">₹60 / kg</span></div>
+                                            <a href="#"><h3 class="product_title">Premium Goda Masala</h3></a>
+                                            <div class="productsub_title"><a href="#">Aromatic, Traditional Blend</a></div>
+                                            <div class="review_rating_wrapper">
+                                                <span style="color:#ffcc00">★</span> 4.8 | <span style="display:inline-flex; align-items:center; justify-content:center; width:13px; height:13px; background:#3498db; color:white; border-radius:50%; font-size:8px; margin:0 2px;">✔</span> 350 Reviews
+                                            </div>
+                                            <div class="price-list"><span class="text-on-sale">₹120</span> <span class="custom_discount-bsl">100g</span></div>
                                             <div class="atc_button"><button>Add To Cart</button></div>
                                         </div> 
                                     </div>  
@@ -1033,12 +1217,15 @@
                                 <li class="product_card_grid">
                                     <div class="product_card">
                                         <a href="#">
-                                            <img src="fresh_potatoes_premium_1778157572110.png" alt="Potatoes" class="product-card__image">
+                                            <img src="prod_kanda_lasun_masala_1778486521532.png" alt="Kanda Lasun" class="product-card__image">
                                         </a>
                                         <div class="product_info">
-                                            <a href="#"><h3 class="product_title">Fresh Farm Potatoes</h3></a>
-                                            <div class="productsub_title"><a href="#">Unwashed, Natural Earthy</a></div>
-                                            <div class="price-list"><span class="text-on-sale">₹40 / kg</span></div>
+                                            <a href="#"><h3 class="product_title">Kanda Lasun Masala</h3></a>
+                                            <div class="productsub_title"><a href="#">Spicy Onion-Garlic Taste</a></div>
+                                            <div class="review_rating_wrapper">
+                                                <span style="color:#ffcc00">★</span> 4.9 | <span style="display:inline-flex; align-items:center; justify-content:center; width:13px; height:13px; background:#3498db; color:white; border-radius:50%; font-size:8px; margin:0 2px;">✔</span> 520 Reviews
+                                            </div>
+                                            <div class="price-list"><span class="text-on-sale">₹95</span> <span class="custom_discount-bsl">100g</span></div>
                                             <div class="atc_button"><button>Add To Cart</button></div>
                                         </div> 
                                     </div>  
@@ -1048,63 +1235,17 @@
                             <div class="owl-item">
                                 <li class="product_card_grid">
                                     <div class="product_card">
-                                        <div class="sale_badges_wrapper"><span class="sale_badge" style="background:var(--primary-dark)">Fresh Picked</span></div>
+                                        <div class="sale_badges_wrapper"><span class="sale_badge">Top Seller</span></div>
                                         <a href="#">
-                                            <img src="red_onions_premium_1778157590824.png" alt="Onions" class="product-card__image">
+                                            <img src="red_chilli_powder_premium_1778157464342.png" alt="Byadgi Chilli" class="product-card__image">
                                         </a>
                                         <div class="product_info">
-                                            <a href="#"><h3 class="product_title">Organic Red Onions</h3></a>
-                                            <div class="productsub_title"><a href="#">Export Quality</a></div>
-                                            <div class="price-list"><span class="text-on-sale">₹50 / kg</span></div>
-                                            <div class="atc_button"><button>Add To Cart</button></div>
-                                        </div> 
-                                    </div>  
-                                </li>
-                            </div>
-
-                            <div class="owl-item">
-                                <li class="product_card_grid">
-                                    <div class="product_card">
-                                        <a href="#">
-                                            <img src="premium_bananas_yellow_1778157609599.png" alt="Bananas" class="product-card__image">
-                                        </a>
-                                        <div class="product_info">
-                                            <a href="#"><h3 class="product_title">Premium Robusta Bananas</h3></a>
-                                            <div class="productsub_title"><a href="#">Naturally Ripened, Sweet</a></div>
-                                            <div class="price-list"><span class="text-on-sale">₹60 / Dozen</span></div>
-                                            <div class="atc_button"><button>Add To Cart</button></div>
-                                        </div> 
-                                    </div>  
-                                </li>
-                            </div>
-
-                             <div class="owl-item">
-                                <li class="product_card_grid">
-                                    <div class="product_card">
-                                        <a href="#">
-                                            <img src="fresh_ginger_premium_1778157651350.png" alt="Ginger" class="product-card__image">
-                                        </a>
-                                        <div class="product_info">
-                                            <a href="#"><h3 class="product_title">Fresh Farm Ginger</h3></a>
-                                            <div class="productsub_title"><a href="#">Potent & Fragrant</a></div>
-                                            <div class="price-list"><span class="text-on-sale">₹120 / kg</span></div>
-                                            <div class="atc_button"><button>Add To Cart</button></div>
-                                        </div> 
-                                    </div>  
-                                </li>
-                            </div>
-
-                            <div class="owl-item">
-                                <li class="product_card_grid">
-                                    <div class="product_card">
-                                        <div class="sale_badges_wrapper"><span class="sale_badge" style="background:var(--primary-dark)">Farm Fresh</span></div>
-                                        <a href="#">
-                                            <img src="white_garlic_premium_bulbs_1778157674665.png" alt="Garlic" class="product-card__image">
-                                        </a>
-                                        <div class="product_info">
-                                            <a href="#"><h3 class="product_title">Pure White Garlic</h3></a>
-                                            <div class="productsub_title"><a href="#">Strong Aroma, Large Buds</a></div>
-                                            <div class="price-list"><span class="text-on-sale">₹150 / kg</span></div>
+                                            <a href="#"><h3 class="product_title">Byadgi Red Chilli Powder</h3></a>
+                                            <div class="productsub_title"><a href="#">High Color, Low Pungency</a></div>
+                                            <div class="review_rating_wrapper">
+                                                <span style="color:#ffcc00">★</span> 4.8 | <span style="display:inline-flex; align-items:center; justify-content:center; width:13px; height:13px; background:#3498db; color:white; border-radius:50%; font-size:8px; margin:0 2px;">✔</span> 890 Reviews
+                                            </div>
+                                            <div class="price-list"><span class="text-on-sale">₹160</span> <span class="custom_discount-bsl">200g</span></div>
                                             <div class="atc_button"><button>Add To Cart</button></div>
                                         </div> 
                                     </div>  
@@ -1115,12 +1256,15 @@
                                 <li class="product_card_grid">
                                     <div class="product_card">
                                         <a href="#">
-                                            <img src="green_chillies_fresh_premium_1778157696811.png" alt="Green Chillies" class="product-card__image">
+                                            <img src="turmeric_powder_premium_1778157487336.png" alt="Turmeric" class="product-card__image">
                                         </a>
                                         <div class="product_info">
-                                            <a href="#"><h3 class="product_title">Fresh Green Chillies</h3></a>
-                                            <div class="productsub_title"><a href="#">Hot & Spicy</a></div>
-                                            <div class="price-list"><span class="text-on-sale">₹80 / kg</span></div>
+                                            <a href="#"><h3 class="product_title">Premium Turmeric Powder</h3></a>
+                                            <div class="productsub_title"><a href="#">High Curcumin, Pure</a></div>
+                                            <div class="review_rating_wrapper">
+                                                <span style="color:#ffcc00">★</span> 4.9 | <span style="display:inline-flex; align-items:center; justify-content:center; width:13px; height:13px; background:#3498db; color:white; border-radius:50%; font-size:8px; margin:0 2px;">✔</span> 1.1k Reviews
+                                            </div>
+                                            <div class="price-list"><span class="text-on-sale">₹110</span> <span class="custom_discount-bsl">200g</span></div>
                                             <div class="atc_button"><button>Add To Cart</button></div>
                                         </div> 
                                     </div>  
@@ -1130,8 +1274,205 @@
                         </div>
                     </div>
                 </ul>
+                <div class="custom-slider-dots">
+                    <!-- Dots injected via JS -->
+                </div>
             </div>
         </div>
+
+        <!-- Section 3: Family Packs -->
+        <div class="related-pro container">
+            <div class="feature_slider_wrapper">
+                <div class="title">
+                    <h2>Family Packs (Jumbo Savings)</h2> 
+                    <div class="view_all"><a href="#">View All &rarr;</a></div>
+                </div>
+                
+                <ul class="feature_slider">
+                    <div class="owl-stage-outer">
+                        <div class="owl-stage">
+                            
+                            <div class="owl-item">
+                                <li class="product_card_grid">
+                                    <div class="product_card">
+                                        <div class="sale_badges_wrapper"><span class="sale_badge" style="background:var(--accent-color)">Save ₹100</span></div>
+                                        <a href="#">
+                                            <img src="red_chilli_powder_premium_1778157464342.png" alt="Chilli 1kg" class="product-card__image">
+                                        </a>
+                                        <div class="product_info">
+                                            <a href="#"><h3 class="product_title">Red Chilli Powder (Jumbo)</h3></a>
+                                            <div class="productsub_title"><a href="#">Bulk Savings Pack</a></div>
+                                            <div class="review_rating_wrapper">
+                                                <span style="color:#ffcc00">★</span> 4.9 | <span style="display:inline-flex; align-items:center; justify-content:center; width:13px; height:13px; background:#3498db; color:white; border-radius:50%; font-size:8px; margin:0 2px;">✔</span> 2.5k Reviews
+                                            </div>
+                                            <div class="price-list"><span class="text-on-sale">₹550</span> <span class="text-subdued">₹650</span> <span class="custom_discount-bsl">1kg</span></div>
+                                            <div class="atc_button"><button>Add To Cart</button></div>
+                                        </div> 
+                                    </div>  
+                                </li>
+                            </div>
+
+                             <div class="owl-item">
+                                <li class="product_card_grid">
+                                    <div class="product_card">
+                                        <a href="#">
+                                            <img src="turmeric_powder_premium_1778157487336.png" alt="Turmeric 1kg" class="product-card__image">
+                                        </a>
+                                        <div class="product_info">
+                                            <a href="#"><h3 class="product_title">Pure Turmeric Powder (Jumbo)</h3></a>
+                                            <div class="productsub_title"><a href="#">Kitchen Essential Bulk</a></div>
+                                            <div class="review_rating_wrapper">
+                                                <span style="color:#ffcc00">★</span> 4.9 | <span style="display:inline-flex; align-items:center; justify-content:center; width:13px; height:13px; background:#3498db; color:white; border-radius:50%; font-size:8px; margin:0 2px;">✔</span> 3.1k Reviews
+                                            </div>
+                                            <div class="price-list"><span class="text-on-sale">₹450</span> <span class="text-subdued">₹500</span> <span class="custom_discount-bsl">1kg</span></div>
+                                            <div class="atc_button"><button>Add To Cart</button></div>
+                                        </div> 
+                                    </div>  
+                                </li>
+                            </div>
+
+                            <div class="owl-item">
+                                <li class="product_card_grid">
+                                    <div class="product_card">
+                                        <a href="#">
+                                            <img src="cumin_seeds_premium_1778157527841.png" alt="Cumin 500g" class="product-card__image">
+                                        </a>
+                                        <div class="product_info">
+                                            <a href="#"><h3 class="product_title">Premium Cumin Seeds</h3></a>
+                                            <div class="productsub_title"><a href="#">Bulk Value Pack</a></div>
+                                            <div class="review_rating_wrapper">
+                                                <span style="color:var(--primary-color)">★</span> 4.8 | <span style="display:inline-flex; align-items:center; justify-content:center; width:13px; height:13px; background:#3498db; color:white; border-radius:50%; font-size:8px; margin:0 2px;">✔</span> 1.2k Reviews
+                                            </div>
+                                            <div class="price-list"><span class="text-on-sale">₹380</span> <span class="custom_discount-bsl">500g</span></div>
+                                            <div class="atc_button"><button>Add To Cart</button></div>
+                                        </div> 
+                                    </div>  
+                                </li>
+                            </div>
+
+                        </div>
+                    </div>
+                </ul>
+                <div class="custom-slider-dots">
+                    <!-- Dots injected via JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: Low-Calorie Products -->
+        <div class="related-pro container">
+            <div class="feature_slider_wrapper">
+                <div class="title">
+                    <h2>Low-Calorie & Healthy Products</h2> 
+                    <div class="view_all"><a href="#">View All &rarr;</a></div>
+                </div>
+                
+                <ul class="feature_slider">
+                    <div class="owl-stage-outer">
+                        <div class="owl-stage">
+                            
+                            <div class="owl-item">
+                                <li class="product_card_grid">
+                                    <div class="product_card">
+                                        <div class="sale_badges_wrapper"><span class="sale_badge" style="background:var(--primary-color)">Healthy Choice</span></div>
+                                        <a href="#">
+                                            <img src="prod_roasted_flax_seeds_1778486553014.png" alt="Flax Seeds" class="product-card__image">
+                                        </a>
+                                        <div class="product_info">
+                                            <a href="#"><h3 class="product_title">Roasted Omega-3 Flax Seeds</h3></a>
+                                            <div class="productsub_title"><a href="#">Nutritious & High-Fiber</a></div>
+                                            <div class="review_rating_wrapper">
+                                                <span style="color:#ffcc00">★</span> 4.7 | <span style="display:inline-flex; align-items:center; justify-content:center; width:13px; height:13px; background:#3498db; color:white; border-radius:50%; font-size:8px; margin:0 2px;">✔</span> 150 Reviews
+                                            </div>
+                                            <div class="price-list"><span class="text-on-sale">₹140</span> <span class="custom_discount-bsl">200g</span></div>
+                                            <div class="atc_button"><button>Add To Cart</button></div>
+                                        </div> 
+                                    </div>  
+                                </li>
+                            </div>
+
+                             <div class="owl-item">
+                                <li class="product_card_grid">
+                                    <div class="product_card">
+                                        <a href="#">
+                                            <img src="prod_jaggery_powder_1778486535669.png" alt="Jaggery" class="product-card__image">
+                                        </a>
+                                        <div class="product_info">
+                                            <a href="#"><h3 class="product_title">Natural Jaggery Powder</h3></a>
+                                            <div class="productsub_title"><a href="#">Zero Processed Sugar</a></div>
+                                            <div class="review_rating_wrapper">
+                                                <span style="color:#ffcc00">★</span> 4.9 | <span style="display:inline-flex; align-items:center; justify-content:center; width:13px; height:13px; background:#3498db; color:white; border-radius:50%; font-size:8px; margin:0 2px;">✔</span> 430 Reviews
+                                            </div>
+                                            <div class="price-list"><span class="text-on-sale">₹85</span> <span class="custom_discount-bsl">500g</span></div>
+                                            <div class="atc_button"><button>Add To Cart</button></div>
+                                        </div> 
+                                    </div>  
+                                </li>
+                            </div>
+
+                            <div class="owl-item">
+                                <li class="product_card_grid">
+                                    <div class="product_card">
+                                        <a href="#">
+                                            <img src="category_staples_round_1778158019202.png" alt="Organic Pulses" class="product-card__image">
+                                        </a>
+                                        <div class="product_info">
+                                            <a href="#"><h3 class="product_title">Unpolished Organic Moong</h3></a>
+                                            <div class="productsub_title"><a href="#">High Protein, Low Calorie</a></div>
+                                            <div class="review_rating_wrapper">
+                                                <span style="color:#ffcc00">★</span> 4.8 | <span style="display:inline-flex; align-items:center; justify-content:center; width:13px; height:13px; background:#3498db; color:white; border-radius:50%; font-size:8px; margin:0 2px;">✔</span> 210 Reviews
+                                            </div>
+                                            <div class="price-list"><span class="text-on-sale">₹110</span> <span class="custom_discount-bsl">500g</span></div>
+                                            <div class="atc_button"><button>Add To Cart</button></div>
+                                        </div> 
+                                    </div>  
+                                </li>
+                            </div>
+
+                        </div>
+                    </div>
+                </ul>
+                <div class="custom-slider-dots">
+                    <!-- Dots injected via JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Offers & Coupons Carousel -->
+        <section class="coupons-section">
+            <div class="container">
+                <div class="title" style="text-align: center; margin-bottom: 30px;">
+                    <h2 style="color: white; font-size: 32px;">Exclusive Offers For You</h2>
+                </div>
+                <div class="coupon-slider">
+                    <!-- Offer 1: Free Shipping -->
+                    <div class="coupon-card">
+                        <h2>FREE SHIPPING</h2>
+                        <p>On all orders above ₹499</p>
+                        <div class="coupon-code">FREESHIP499</div>
+                    </div>
+                    <!-- Offer 2: 10% Discount -->
+                    <div class="coupon-card">
+                        <h2>10% DISCOUNT</h2>
+                        <p>On all orders above ₹999</p>
+                        <div class="coupon-code">MKFRESH10</div>
+                    </div>
+                    <!-- Offer 3: 20% Discount -->
+                    <div class="coupon-card">
+                        <h2>20% DISCOUNT</h2>
+                        <p>On all orders above ₹2000</p>
+                        <div class="coupon-code">MKJUMBO20</div>
+                    </div>
+                    <!-- Offer 4: Monthly Subscription -->
+                    <div class="coupon-card">
+                        <h2>10% EXTRA OFF</h2>
+                        <p>For Monthly Subscriptions</p>
+                        <div class="coupon-code">SUBSAVE10</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <!-- Footer (Restyled to match the dark, rich grid layout) -->
@@ -1223,44 +1564,6 @@
         </div>
     </footer>
 
-    <style>
-        /* ULTIMATE LAYOUT FIX */
-        .product_card_grid, .product_card { 
-            padding: 0 !important; 
-            margin: 0 !important; 
-            overflow: hidden !important; 
-            display: flex !important;
-            flex-direction: column !important;
-        }
-        .product-card__image { 
-            width: 100% !important; 
-            height: 280px !important; 
-            min-height: 280px !important;
-            max-height: 280px !important;
-            object-fit: cover !important; 
-            display: block !important; 
-            border-radius: 0 !important;
-            margin: 0 !important;
-        }
-        .product_info { 
-            padding: 20px !important; 
-            flex: 1 !important; 
-            display: flex !important; 
-            flex-direction: column !important;
-            background: white !important;
-        }
-        .product_title { 
-            min-height: 44px !important; 
-            margin-bottom: 10px !important;
-        }
-        .atc_button {
-            margin-top: auto !important; 
-        }
-        .sale_badges_wrapper {
-            top: 15px !important;
-            left: 15px !important;
-        }
-    </style>
 
     <script>
         // Mobile Menu Logic
@@ -1283,6 +1586,58 @@
 
         menuClose.addEventListener('click', closeMenu);
         navOverlayBg.addEventListener('click', closeMenu);
+
+        // Native Slider Dots Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const sliders = document.querySelectorAll('.feature_slider_wrapper');
+            
+            const updateSliders = () => {
+                sliders.forEach(sliderWrapper => {
+                    const stage = sliderWrapper.querySelector('.owl-stage');
+                    const items = sliderWrapper.querySelectorAll('.owl-item');
+                    const dotsContainer = sliderWrapper.querySelector('.custom-slider-dots');
+                    if (!stage || !items.length || !dotsContainer) return;
+
+                    const itemsPerPage = window.innerWidth > 768 ? 4 : 2;
+                    const numPages = Math.ceil(items.length / itemsPerPage);
+                    
+                    // Only recreate dots if count changed
+                    if (dotsContainer.children.length !== numPages) {
+                        dotsContainer.innerHTML = '';
+                        for (let i = 0; i < numPages; i++) {
+                            const dot = document.createElement('span');
+                            dot.className = i === 0 ? 'dot active' : 'dot';
+                            dot.dataset.page = i;
+                            dot.addEventListener('click', () => {
+                                const itemWidth = items[0].offsetWidth + 20; // 20px gap
+                                stage.scrollTo({
+                                    left: i * itemsPerPage * itemWidth,
+                                    behavior: 'smooth'
+                                });
+                            });
+                            dotsContainer.appendChild(dot);
+                        }
+                    }
+
+                    const dots = dotsContainer.querySelectorAll('.dot');
+                    stage.onscroll = () => {
+                        const itemWidth = items[0].offsetWidth + 20;
+                        const scrollLeft = stage.scrollLeft;
+                        let index = Math.round(scrollLeft / (itemWidth * itemsPerPage));
+                        if (index >= dots.length) index = dots.length - 1;
+                        if (index < 0) index = 0;
+                        
+                        dots.forEach((d, i) => {
+                            if (i === index) d.classList.add('active');
+                            else d.classList.remove('active');
+                        });
+                    };
+                });
+            };
+
+            updateSliders();
+            window.addEventListener('resize', updateSliders);
+        });
     </script>
 
 </body>

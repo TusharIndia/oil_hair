@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html class="js" lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, maximum-scale=5.0">
+    <title>Authentic Kolhapuri Kala Masala | Mkagrofresh</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #FFB000;
+            --primary-dark: #e69e00;
+            --accent-color: #D9381E;
+            --bg-color: #fcfcfc;
+            --text-main: #2c3e50;
+            --text-light: #7f8c8d;
+            --border-light: #eaeaea;
+            --font-family: 'Outfit', sans-serif;
+            --light-green: #e9f9f1;
+            --dark-green: #2ecc71;
+            --card-bg: #f8f9fa;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: var(--font-family); }
+        body { background: var(--bg-color); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
+        a { text-decoration: none; color: inherit; display: inline-block; }
+        ul { list-style: none; }
+        img { max-width: 100%; height: auto; display: block; }
+        button { cursor: pointer; border: none; outline: none; font-family: inherit; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 15px; }
+
+        /* HEADER & NAV from popop.html */
+        .announcement-bar { background-color: var(--primary-color); color: #000; text-align: center; padding: 10px 15px; font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+        .header { background: #ffffff; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; }
+        .custom_header { display: flex; align-items: center; justify-content: space-between; padding: 15px 0; }
+        .custom-logo-container a { display: flex; align-items: center; gap: 10px; font-size: 36px; font-weight: 800; color: #000; letter-spacing: -0.5px; }
+        .custom-logo-container img { width: 56px; height: 56px; object-fit: contain; }
+        .custom_search_nav { flex: 1; display: flex; justify-content: center; align-items: center; }
+        .custom_group_nav ul { display: flex; gap: 30px; justify-content: center; align-items: center; }
+        .custom_group_nav a { font-size: 14px; font-weight: 600; text-transform: uppercase; color: var(--text-main); transition: color 0.3s; }
+        .custom_group_nav a:hover { color: var(--primary-color); }
+        .custom-header-icon-layout { display: flex; align-items: center; gap: 20px; }
+        .header_icn { width: 28px; height: 28px; stroke: var(--text-main); overflow: visible !important; }
+        .DoctorConsultationWrapper { background: var(--primary-color); color: white; padding: 8px 16px; border-radius: 6px; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 8px; transition: background 0.3s; }
+        .DoctorConsultationWrapper:hover { background: var(--primary-dark); }
+        
+        .mobile-menu-toggle { display: none; cursor: pointer; padding: 5px; }
+        .mobile-menu-toggle svg { width: 32px; height: 32px; stroke: var(--text-main); stroke-width: 2.5; }
+        .mobile-nav-overlay { position: fixed; top: 0; left: -100%; width: 80%; height: 100%; background: white; z-index: 2000; transition: left 0.3s ease; box-shadow: 5px 0 15px rgba(0,0,0,0.1); padding: 30px; }
+        .mobile-nav-overlay.active { left: 0; }
+        .mobile-nav-close { text-align: right; margin-bottom: 30px; cursor: pointer; }
+        .mobile-nav-links li { margin-bottom: 25px; }
+        .mobile-nav-links a { font-size: 18px; font-weight: 700; color: var(--text-main); }
+        .nav-overlay-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1999; display: none; }
+        .nav-overlay-bg.active { display: block; }
+        
+        @media (max-width: 1024px) {
+            .mobile-menu-toggle { display: block; }
+            .custom_search_nav { display: none; }
+        }
+        @media (max-width: 768px) {
+            .custom_header { padding: 12px 10px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+            .mobile-menu-toggle { display: flex; align-items: center; flex-shrink: 0; }
+            .custom-logo-container { flex: 1; text-align: left; min-width: 0; }
+            .custom-logo-container a { font-size: clamp(14px, 4.5vw, 22px); gap: clamp(4px, 1.5vw, 8px); justify-content: flex-start; white-space: nowrap; }
+            .custom-logo-container img { width: clamp(32px, 8vw, 44px); height: clamp(32px, 8vw, 44px); object-fit: contain; flex-shrink: 0; }
+            .custom-header-icon-layout { display: flex; justify-content: flex-end; gap: clamp(8px, 2vw, 15px); padding-right: 5px; flex-shrink: 0; }
+            .header_icn { width: 24px; height: 24px; }
+            .announcement-bar { font-size: 11px; padding: 8px 10px; }
+            .DoctorConsultationWrapper { display: none; }
+        }
+
+        /* PDP MAIN */
+        .pdp-main { padding: 60px 0 60px; }
+        @media (max-width: 991px) { .pdp-main { padding: 20px 0 220px; } }
+
+        .product-flex { display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; margin-bottom: 40px; width: 100%; max-width: 100%; }
+        .gallery-side, .info-side { min-width: 0; max-width: 100%; }
+        @media (max-width: 991px) { .product-flex { grid-template-columns: 1fr; gap: 20px; } }
+        
+        /* Gallery */
+        .main-img-box { width: 100%; aspect-ratio: 1/1; border-radius: 15px; overflow: hidden; background: #fff; border: 1px solid #eee; margin-bottom: 10px; }
+        .img-track { display: flex; transition: transform 0.4s; height: 100%; }
+        .img-track img { width: 100%; height: 100%; object-fit: contain; flex-shrink: 0; }
+        .thumb-row { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding-bottom: 5px; }
+        .thumb-row::-webkit-scrollbar { display: none; }
+        .thumb-item { width: 70px; height: 70px; border-radius: 10px; border: 2px solid transparent; cursor: pointer; padding: 3px; background: #fff; flex-shrink: 0; }
+        .thumb-item.active { border-color: var(--primary-color); }
+        .thumb-item img { width: 100%; height: 100%; object-fit: cover; border-radius: 6px; }
+
+        /* Info Side */
+        .product-title { font-size: 28px; font-weight: 800; color: #000; margin-bottom: 10px; line-height: 1.2; word-wrap: break-word; overflow-wrap: break-word; }
+        @media (min-width: 769px) { .product-title { font-size: 36px; } }
+        .product-stars { color: var(--primary-color); font-size: 16px; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; font-weight: 700; }
+        .price-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+        .p-price { font-size: 28px; font-weight: 800; color: #000; }
+        .p-original { font-size: 18px; text-decoration: line-through; color: #999; }
+        .p-discount { background: var(--accent-color); color: #fff; padding: 3px 8px; border-radius: 5px; font-size: 12px; font-weight: 800; }
+
+        .product-desc-box { margin-bottom: 25px; border-left: 3px solid var(--primary-color); padding-left: 15px; }
+        .product-desc-box p { font-size: 14px; color: #555; line-height: 1.6; font-weight: 500; }
+
+        .variant-options { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+        .v-opt { padding: 10px 20px; border: 2px solid #eee; border-radius: 10px; font-size: 14px; font-weight: 800; cursor: pointer; background: #fff; }
+        .v-opt.active { border-color: var(--primary-color); background: #fffdf0; }
+
+        /* Delivery & Offers */
+        .section-title { font-size: 16px; font-weight: 800; color: #000; margin-bottom: 10px; margin-top: 20px; text-transform: uppercase; }
+        .delivery-box { background: var(--card-bg); padding: 15px; border-radius: 12px; border: 1px solid #eee; margin-bottom: 20px; }
+        .delivery-input-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; width: 100%; }
+        .delivery-field { flex: 1; min-width: 0; border-bottom: 2px solid #ccc; padding: 5px 0; font-size: 15px; font-weight: 700; color: #333; }
+        .delivery-field input { border: none; background: transparent; outline: none; width: 100%; font-weight: 700; font-size: 15px; text-overflow: ellipsis; }
+        .check-btn { background: #000; color: #fff; padding: 6px 18px; border-radius: 6px; font-size: 13px; font-weight: 800; margin-left: 10px; flex-shrink: 0; }
+        .delivery-info { font-size: 13px; font-weight: 700; color: var(--dark-green); }
+        .delivery-info span { color: #000; }
+
+        .offers-scroll { display: flex; gap: 12px; overflow-x: auto; padding-top: 15px; padding-bottom: 10px; scrollbar-width: none; }
+        .offer-card { min-width: 200px; background: #eaf8f4; border: 1.5px solid #c2e9df; border-radius: 12px; padding: 22px 15px 15px; position: relative; text-align: center; }
+        .offer-badge { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); padding: 4px 10px; border-radius: 5px; font-size: 10px; font-weight: 900; color: #fff; white-space: nowrap; }
+        .badge-popular { background: #2f9e76; }
+        .badge-value { background: #232f3e; }
+        .offer-buy { font-size: 18px; font-weight: 800; color: #000; margin-top: 8px; margin-bottom: 4px; }
+        .offer-get { font-size: 13px; font-weight: 700; color: #2f9e76; margin-bottom: 10px; }
+        .offer-code { border: 1px dashed #2f9e76; padding: 6px; border-radius: 5px; font-size: 12px; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 6px; }
+
+        /* Desktop CTA Hide/Show */
+        .desktop-cta { display: none; margin-top: 30px; }
+        @media (min-width: 992px) { .desktop-cta { display: block; } }
+        .cta-btns { display: flex; gap: 10px; }
+        .cta-btns button { flex: 1; padding: 15px; border-radius: 12px; font-weight: 900; text-transform: uppercase; font-size: 13px; }
+        .cta-atc { background: #fff; border: 2px solid #000; color: #000; }
+        .cta-buy { background: var(--primary-color); color: #000; box-shadow: 0 4px 12px rgba(255,176,0,0.2); }
+
+        /* Trust Grid */
+        .trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; padding: 30px 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee; margin-bottom: 50px; }
+        .trust-card { text-align: center; }
+        .t-icon { width: 44px; height: 44px; margin: 0 auto 10px; background: #f4f4f4; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .trust-card p { font-size: 12px; font-weight: 800; color: #333; }
+        @media (max-width: 768px) { .trust-grid { grid-template-columns: repeat(2, 1fr); } }
+
+        /* Highlights Grid */
+        .highlights-section { margin-bottom: 60px; }
+        .section-header { text-align: center; margin-bottom: 30px; }
+        .section-header h2 { font-size: 26px; font-weight: 800; color: #000; }
+        .section-header::after { content: ''; display: block; width: 50px; height: 3px; background: var(--primary-color); margin: 10px auto 0; }
+
+        .boat-highlights-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .highlight-item { border-radius: 15px; overflow: hidden; position: relative; background: #000; }
+        .highlight-item img { width: 100%; height: 100%; object-fit: cover; }
+        .highlight-item .overlay-text { position: absolute; top: 20px; left: 20px; z-index: 2; }
+        .highlight-item .overlay-text h3 { font-size: 22px; font-weight: 900; color: #fff; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); line-height: 1.1; margin-bottom: 5px; }
+        .highlight-item .overlay-text p { font-size: 13px; font-weight: 800; color: #fff; text-shadow: 1px 1px 8px rgba(0,0,0,0.8); }
+        .h-large { grid-row: span 2; height: 450px; }
+        .h-small { height: 219px; }
+        .h-full { grid-column: span 2; height: 300px; }
+        @media (max-width: 768px) { 
+            .boat-highlights-grid { grid-template-columns: 1fr; } 
+            .h-large, .h-small, .h-full { height: 300px; grid-row: auto; grid-column: auto; }
+            .highlight-item .overlay-text h3 { font-size: 24px; }
+        }
+
+        /* Specs */
+        .specs-container { padding: 40px; background: #f9f9f9; border-radius: 16px; margin-bottom: 50px; }
+        .specs-title { font-size: 38px; font-weight: 800; margin-bottom: 30px; color: #111; line-height: 1.1; letter-spacing: -1px; }
+        .specs-title span { font-weight: 300; }
+        .specs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px 20px; }
+        .spec-item label { display: block; font-size: 11px; color: #888; font-weight: 500; margin-bottom: 4px; text-transform: capitalize; }
+        .spec-item span { display: block; font-size: 13px; font-weight: 700; color: #111; line-height: 1.4; word-wrap: break-word; overflow-wrap: break-word; }
+        @media (max-width: 768px) { 
+            .specs-container { padding: 25px 20px; }
+            .specs-title { font-size: 32px; margin-bottom: 25px; }
+            .specs-grid { grid-template-columns: 1fr 1fr; gap: 20px 15px; } 
+        }
+
+        /* Reviews */
+        .verified-reviews-box { padding: 50px 0; border-top: 1px solid #eee; }
+        .rev-header h2 { font-size: 32px; font-weight: 800; text-align: center; margin-bottom: 40px; }
+        .rev-stats { display: flex; align-items: center; justify-content: center; gap: 30px; margin-bottom: 40px; }
+        .big-rating { font-size: 48px; font-weight: 900; }
+        .rating-bars { flex: 1; max-width: 350px; width: 100%; }
+        .r-bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; font-size: 11px; font-weight: 700; }
+        .r-bar-row span { min-width: 40px; text-align: left; }
+        .bar-bg { flex: 1; height: 6px; background: #eee; border-radius: 3px; overflow: hidden; }
+        .bar-fill { height: 100%; background: var(--primary-color); }
+
+        .reviews-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .rev-card { border: 1px solid #eee; padding: 20px; border-radius: 12px; }
+        .rev-name { font-size: 15px; font-weight: 800; display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
+        .rev-name::after { content: 'Verified'; font-size: 10px; background: #e9f9f1; color: #2ecc71; padding: 1px 5px; border-radius: 3px; }
+        @media (max-width: 991px) { .reviews-list { grid-template-columns: 1fr; } .rev-stats { flex-direction: column; text-align: center; } }
+
+        /* Sticky Footer */
+        .mobile-footer-cta { position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; box-shadow: 0 -8px 25px rgba(0,0,0,0.08); padding: 12px 15px 30px; z-index: 1001; }
+        .mobile-footer-cta .float-offer { background: #e9f9f1; color: #2ecc71; text-align: center; font-size: 11px; font-weight: 900; padding: 8px; border-radius: 6px; margin-bottom: 12px; }
+        .mobile-footer-cta .cta-btns { display: flex; gap: 8px; }
+        .mobile-footer-cta .cta-atc { background: #fff; border: 2px solid #000; color: #000; }
+        .mobile-footer-cta .cta-buy { background: var(--primary-color); color: #000; }
+        @media (min-width: 992px) { .mobile-footer-cta { display: none; } }
+
+        /* FOOTER from popop.html */
+        .shopify-section-group-footer-group { background: #232f3e; color: #ffffff; }
+        .custom_footer { padding: 60px 0; }
+        .footer__block-list { display: flex; flex-wrap: wrap; gap: 40px; justify-content: space-between; }
+        .footer_grid { flex: 1; min-width: 200px; }
+        .footer-block__heading { font-size: 18px; margin-bottom: 25px; color: #ffffff; text-transform: uppercase; border-bottom: 2px solid var(--primary-color); display: inline-block; padding-bottom: 8px; font-weight: 700; }
+        .footer_grid ul li { margin-bottom: 15px; }
+        .footer_grid a { color: #cccccc; transition: all 0.3s; font-size: 15px; }
+        .footer_grid a:hover { color: var(--primary-color); padding-left: 5px; }
+        .footer_grid p { color: #cccccc; font-size: 15px; margin-bottom: 12px; line-height: 1.6;}
+        .social-icons { display: flex; gap: 15px; margin-top: 25px; }
+        .social-icons a { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: rgba(255, 255, 255, 0.1); border-radius: 50%; color: #fff; transition: all 0.3s ease; }
+        .social-icons a:hover { background: var(--primary-color); transform: translateY(-3px); }
+        .social-icons svg { width: 18px; height: 18px; fill: currentColor; }
+        .keyword_wrapper { background: #131a22; padding: 50px 0; border-top: 1px solid #111; }
+        .keyword_row { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 35px; }
+        .keyword_row .title { font-weight: 700; margin-bottom: 12px; color: #ffffff; font-size: 16px;}
+        .keyword_row .description { color: #95a5a6; font-size: 14px; line-height: 1.6;}
+        .footer_content_bottom { text-align: center; padding: 25px 0; background: #0d141a; font-size: 14px; color: #7f8c8d; }
+        
+        @media (max-width: 768px) {
+            .footer__block-list { flex-direction: column; text-align: center; gap: 40px; }
+            .footer_grid { width: 100%; }
+            .social-icons { justify-content: center; }
+            .footer-block__heading::after { left: 50%; transform: translateX(-50%); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Announcement Bar -->
+    <aside class="shopify-section--announcement-bar">
+        <div class="announcement-bar">
+            <p>100% Pure & Natural Spices • Farm to Table • Vocal for Local</p>
+        </div>
+    </aside>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container custom_header">
+            <div class="mobile-menu-toggle" id="menuToggle">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </div>
+
+            <div class="custom-logo-container">
+                <a href="/">
+                    <img src="mkagrofresh_logo.png" alt="MKAGROFRESH Logo">
+                    MKAGROFRESH
+                </a>
+            </div>
+            
+            <div class="custom_search_nav">
+                <nav class="custom_group_nav">
+                    <ul>
+                        <li><a href="popop.html">Home</a></li>
+                        <li><a href="#">Premium Spices</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="custom-header-icon-layout">
+                <a class="DoctorConsultationWrapper" href="bulk-enquiry.html">
+                    Bulk Enquiry & Franchise
+                </a>
+                <a href="https://wa.me/your-number" class="header__icon" target="_blank" aria-label="WhatsApp">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="header_icn">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                      <path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" />
+                      <path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1" />
+                    </svg>
+                </a>
+                <a href="#" class="header__icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="header_icn"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                </a>
+                <a href="#" class="header__icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="header_icn"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L22 6H6"></path></svg>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Nav Slide-in -->
+    <div class="nav-overlay-bg" id="navOverlayBg"></div>
+    <div class="mobile-nav-overlay" id="mobileNav">
+        <div class="mobile-nav-close" id="menuClose">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </div>
+        <ul class="mobile-nav-links">
+            <li><a href="popop.html">Home</a></li>
+            <li><a href="#">Premium Spices</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="bulk-enquiry.html" style="color: var(--primary-color);">Bulk Enquiry & Franchise</a></li>
+        </ul>
+    </div>
+
+    <main class="pdp-main">
+        <div class="container">
+            <div class="product-flex">
+                <div class="gallery-side">
+                    <div class="main-img-box">
+                        <div class="img-track" id="mainTrack">
+                            <img src="kala_masala_250g_1778503705750.png">
+                            <img src="kala_masala_texture_1778503857912.png">
+                            <img src="kala_masala_ingredients_1778503873139.png">
+                            <img src="kala_masala_dish_1778503888887.png">
+                        </div>
+                    </div>
+                    <div class="thumb-row">
+                        <div class="thumb-item active" onclick="jumpTo(0)"><img src="kala_masala_250g_1778503705750.png"></div>
+                        <div class="thumb-item" onclick="jumpTo(1)"><img src="kala_masala_texture_1778503857912.png"></div>
+                        <div class="thumb-item" onclick="jumpTo(2)"><img src="kala_masala_ingredients_1778503873139.png"></div>
+                        <div class="thumb-item" onclick="jumpTo(3)"><img src="kala_masala_dish_1778503888887.png"></div>
+                    </div>
+                </div>
+
+                <div class="info-side">
+                    <h1 class="product-title">Authentic Kolhapuri Kala Masala</h1>
+
+                    <!-- NEW: Premium Product Description -->
+                    <div class="product-desc-box">
+                        <p>Experience the bold, smoky, and authentic flavor of Kolhapur. Hand-crafted using 25+ premium spices including hand-picked chillies, dagad phool, and triphala, this masala is slowly roasted to perfection. The secret ingredient for authentic Tambda Rassa, Misal Pav, and spicy Maharashtrian curries.</p>
+                    </div>
+
+                    <div class="product-stars">★★★★★ <span style="color:#000; opacity:0.6; font-size:13px; margin-left:5px;">4.9 (4,017 Reviews)</span></div>
+
+                    <div class="price-row">
+                        <span class="p-price" id="pPrice">₹189</span>
+                        <span class="p-original" id="pOrig">₹249</span>
+                        <span class="p-discount">24% OFF</span>
+                    </div>
+
+                    <div class="variant-options">
+                        <div class="v-opt active" onclick="changeV('250g', 189, 249, 'kala_masala_250g_1778503705750.png')">250g</div>
+                        <div class="v-opt" onclick="changeV('500g', 349, 450, 'kala_masala_500g_1778503727230.png')">500g</div>
+                        <div class="v-opt" onclick="changeV('1kg', 649, 850, 'kala_masala_1kg_1778503743239.png')">1kg</div>
+                    </div>
+
+                    <h2 class="section-title">Check Delivery</h2>
+                    <div class="delivery-box">
+                        <div class="delivery-input-row">
+                            <div class="delivery-field"><input type="text" placeholder="122008" value="122008"></div>
+                            <button class="check-btn">Change</button>
+                        </div>
+                        <div class="delivery-info">Free delivery <span>| By Saturday, 16 May</span></div>
+                    </div>
+
+                    <h2 class="section-title">Active Offers</h2>
+                    <div class="offers-scroll">
+                        <div class="offer-card">
+                            <span class="offer-badge badge-popular">FREE SHIPPING</span>
+                            <p class="offer-buy">Orders Above ₹499</p>
+                            <p class="offer-get">No extra cost</p>
+                            <div class="offer-code">Code: FREESHIP499</div>
+                        </div>
+                        <div class="offer-card">
+                            <span class="offer-badge badge-value">BEST VALUE</span>
+                            <p class="offer-buy">Orders Above ₹999</p>
+                            <p class="offer-get">Get 10% Off</p>
+                            <div class="offer-code">Code: MKFRESH10</div>
+                        </div>
+                        <div class="offer-card">
+                            <span class="offer-badge badge-popular">JUMBO SAVINGS</span>
+                            <p class="offer-buy">Orders Above ₹2000</p>
+                            <p class="offer-get">Get 20% Off</p>
+                            <div class="offer-code">Code: MKJUMBO20</div>
+                        </div>
+                        <div class="offer-card">
+                            <span class="offer-badge badge-value">SUBSCRIPTION</span>
+                            <p class="offer-buy">Monthly Sub</p>
+                            <p class="offer-get">Extra 10% Off</p>
+                            <div class="offer-code">Code: SUBSAVE10</div>
+                        </div>
+                    </div>
+
+                    <div class="desktop-cta">
+                        <div class="cta-btns">
+                            <button class="cta-atc">Add to Cart</button>
+                            <button class="cta-buy">Buy Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="trust-grid">
+                <div class="trust-card"><div class="t-icon"><img src="https://cdn-icons-png.flaticon.com/512/950/950299.png" style="width:20px;"></div><p>100% Natural</p></div>
+                <div class="trust-card"><div class="t-icon"><img src="https://cdn-icons-png.flaticon.com/512/2312/2312661.png" style="width:20px;"></div><p>Farm to Table</p></div>
+                <div class="trust-card"><div class="t-icon"><img src="https://cdn-icons-png.flaticon.com/512/709/709790.png" style="width:20px;"></div><p>Free Delivery</p></div>
+                <div class="trust-card"><div class="t-icon"><img src="https://cdn-icons-png.flaticon.com/512/1611/1611154.png" style="width:20px;"></div><p>GST Billing</p></div>
+            </div>
+
+            <section class="highlights-section">
+                <div class="section-header"><h2>QUICK PRODUCT HIGHLIGHTS</h2></div>
+                <div class="boat-highlights-grid">
+                    <div class="highlight-item h-large">
+                        <img src="hero_kolhapuri_kala_masala_portrait_1778485607042.png">
+                        <div class="overlay-text"><h3>100% PURE<br>TRADITION</h3><p>Hand-selected chillies</p></div>
+                    </div>
+                    <div class="highlight-item h-small">
+                        <img src="prod_goda_masala_1778486505444.png">
+                        <div class="overlay-text"><h3>HAND<br>GROUND</h3><p>Natural oils intact</p></div>
+                    </div>
+                    <div class="highlight-item h-small">
+                        <img src="category_maharashtrian_round_1778485151280.png">
+                        <div class="overlay-text"><h3>FARM<br>FRESH</h3><p>Local Maharashtra sourcing</p></div>
+                    </div>
+                    <div class="highlight-item h-small">
+                        <img src="red_chilli_powder_premium_1778157464342.png">
+                        <div class="overlay-text"><h3>NO<br>COLORS</h3><p>100% natural vibrancy</p></div>
+                    </div>
+                    <div class="highlight-item h-small">
+                        <img src="turmeric_powder_premium_1778157487336.png">
+                        <div class="overlay-text"><h3>DEEP<br>AROMA</h3><p>Smoky Kolhapuri flavor</p></div>
+                    </div>
+                    <div class="highlight-item h-full">
+                        <img src="prod_kanda_lasun_masala_1778486521532.png">
+                        <div class="overlay-text"><h3>PREMIUM<br>SEAL</h3><p>Triple-layer moisture lock</p></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="specs-container">
+                <h2 class="specs-title"><span>Product</span><br>Specifications</h2>
+                <div class="specs-grid">
+                    <div class="spec-item"><label>Name</label><span>Authentic Kolhapuri Kala Masala</span></div>
+                    <div class="spec-item"><label>Category</label><span>Traditional Indian Spices</span></div>
+                    
+                    <div class="spec-item"><label>Net Content</label><span id="specW">250g Pouch (Pack of 1)</span></div>
+                    <div class="spec-item"><label>Product Dimensions</label><span>22.5 x 15 x 4 cm</span></div>
+                    
+                    <div class="spec-item"><label>Country Of Origin</label><span>India</span></div>
+                    <div class="spec-item"><label>MRP (Inclusive All Taxes)</label><span id="specMRP">₹249</span></div>
+                    
+                    <div class="spec-item"><label>Manufactured by</label><span>MK Agro Spices Pvt. Ltd., Plot No 12, MIDC, Beed</span></div>
+                    <div class="spec-item"><label>Marketed By</label><span>MK Agro Farms, Unit 2, Ambajogai, Maharashtra - 431517</span></div>
+                    
+                    <div class="spec-item"></div>
+                    <div class="spec-item"><label>For consumer complaints contact us at:</label><span>022-6918-1920<br>care@mkagrofresh.com<br>MK Agro Farms, Ambajogai - 431517</span></div>
+                </div>
+            </section>
+
+            <section class="verified-reviews-box">
+                <div class="rev-header"><h2>Verified Reviews</h2></div>
+                <div class="rev-stats">
+                    <div class="big-rating">4.9</div>
+                    <div class="rating-bars">
+                        <div class="r-bar-row"><span>5 Star</span><div class="bar-bg"><div class="bar-fill" style="width: 95%;"></div></div></div>
+                        <div class="r-bar-row"><span>4 Star</span><div class="bar-bg"><div class="bar-fill" style="width: 5%;"></div></div></div>
+                    </div>
+                </div>
+                <div class="reviews-list">
+                    <div class="rev-card"><div class="rev-name">Zaid</div><div style="color:var(--primary-color); margin-bottom:5px;">★★★★★</div><p style="font-size:13px;">Authentic aroma and perfect spice level.</p></div>
+                    <div class="rev-card"><div class="rev-name">Priya S.</div><div style="color:var(--primary-color); margin-bottom:5px;">★★★★★</div><p style="font-size:13px;">Great hand-ground texture. Five stars!</p></div>
+                    <div class="rev-card"><div class="rev-name">Rahul M.</div><div style="color:var(--primary-color); margin-bottom:5px;">★★★★★</div><p style="font-size:13px;">Fresh and quick delivery. Will buy again.</p></div>
+                    <div class="rev-card"><div class="rev-name">Sneha P.</div><div style="color:var(--primary-color); margin-bottom:5px;">★★★★★</div><p style="font-size:13px;">Best Kolhapuri masala I've found online. The Tambda Rassa turned out amazing!</p></div>
+                    <div class="rev-card"><div class="rev-name">Amit K.</div><div style="color:var(--primary-color); margin-bottom:5px;">★★★★☆</div><p style="font-size:13px;">Very good flavor, a bit spicy but exactly what you expect from Kolhapur.</p></div>
+                    <div class="rev-card"><div class="rev-name">Pooja D.</div><div style="color:var(--primary-color); margin-bottom:5px;">★★★★★</div><p style="font-size:13px;">Premium quality and lovely aroma. Definitely recommending to family.</p></div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="shopify-section-group-footer-group">
+        <!-- Main Footer Links -->
+        <div class="custom_footer container">
+            <div class="footer__block-list">
+                <div class="footer_grid">
+                    <h2 class="footer-block__heading">Quick Links</h2>
+                    <ul>
+                        <li><a href="#">Shop Spices</a></li>
+                        <li><a href="#">Fresh Vegetables</a></li>
+                        <li><a href="#">Bulk Orders (B2B)</a></li>
+                        <li><a href="#">Track Order</a></li>
+                    </ul>
+                </div>
+                <div class="footer_grid">
+                    <h2 class="footer-block__heading">Our Policies</h2>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Refund Policy</a></li>
+                        <li><a href="#">Shipping Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer_grid">
+                    <h2 class="footer-block__heading">Contact Us</h2>
+                    <p>MK Agro Farms & Processing</p>
+                    <p>Ambajogai, Maharashtra, India</p>
+                    <p>info@mkagrofresh.com</p>
+                    <p>+91 98765 43210</p>
+                    
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3.6l.4-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+                        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                        <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></a>
+                        <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEO Keywords Section -->
+        <div class="keyword_wrapper">
+            <div class="container keyword_row">
+                <div>
+                    <div class="title">Mkagrofresh: The Soul of Authentic Spice</div>
+                    <div class="description">Ignite your culinary passion with MK Agro’s Apsara Range. We bring you the finest sun-dried chillies and turmeric, crafted to deliver legendary regional tastes. Our products are the secret ingredient your kitchen has been waiting for.</div>
+                </div>
+                <div>
+                    <div class="title">Our USP: 100% Pure & Natural</div>
+                    <div class="description">We believe in honesty on your plate. Our spices contain no artificial colors, no lead chromate, and no preservatives. You get 100% pure roots and chillies in every pinch.</div>
+                </div>
+                <div>
+                    <div class="title">The "Ghar-Guti" Touch</div>
+                    <div class="description">Crafted to replicate the taste of homemade spices, providing that nostalgic, rich flavor that reminds you of traditional cooking. We proudly support the "Vocal for Local" initiative.</div>
+                </div>
+                <div>
+                    <div class="title">Popular Categories</div>
+                    <div class="description">Apsara Red Chilli Powder | Special Blend Turmeric | Farm Fresh Vegetables | Organic Pulses | Bulk Spices | Natural Ingredients</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer_content_bottom">
+            <div class="container">
+                <small>© 2026 - Mkagrofresh | MK Agro Farms & Processing. All Rights Reserved.</small>
+            </div>
+        </div>
+    </footer>
+
+    <div class="mobile-footer-cta">
+        <div class="float-offer">Get at ₹189 by using code MKFRESH10</div>
+        <div class="cta-btns">
+            <button class="cta-atc">Add to Cart</button>
+            <button class="cta-buy">Buy Now</button>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Menu Logic
+        const menuToggle = document.getElementById('menuToggle');
+        const menuClose = document.getElementById('menuClose');
+        const mobileNav = document.getElementById('mobileNav');
+        const navOverlayBg = document.getElementById('navOverlayBg');
+
+        if(menuToggle) {
+            menuToggle.addEventListener('click', () => {
+                mobileNav.classList.add('active');
+                navOverlayBg.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        }
+
+        const closeMenu = () => {
+            if(mobileNav) mobileNav.classList.remove('active');
+            if(navOverlayBg) navOverlayBg.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        };
+
+        if(menuClose) menuClose.addEventListener('click', closeMenu);
+        if(navOverlayBg) navOverlayBg.addEventListener('click', closeMenu);
+
+        let currentIdx = 0;
+        const track = document.getElementById('mainTrack');
+        const thumbs = document.querySelectorAll('.thumb-item');
+        let sliderInterval;
+
+        function jumpTo(idx) {
+            currentIdx = idx;
+            track.style.transform = `translateX(-${idx * 100}%)`;
+            thumbs.forEach((t, i) => i === idx ? t.classList.add('active') : t.classList.remove('active'));
+        }
+        
+        function startSlider() {
+            clearInterval(sliderInterval);
+            sliderInterval = setInterval(() => { currentIdx = (currentIdx + 1) % 4; jumpTo(currentIdx); }, 5000);
+        }
+        startSlider();
+
+        function changeV(w, p, o, imgFile) {
+            document.getElementById('pPrice').innerText = '₹' + p;
+            document.getElementById('pOrig').innerText = '₹' + o;
+            
+            // Update weight in specifications
+            const specW = document.getElementById('specW');
+            if(specW) specW.innerText = w + ' Pouch (Pack of 1)';
+            const specMRP = document.getElementById('specMRP');
+            if(specMRP) specMRP.innerText = '₹' + o;
+
+            // Change images
+            if (imgFile) {
+                track.children[0].src = imgFile;
+                thumbs[0].querySelector('img').src = imgFile;
+                jumpTo(0);
+                startSlider(); // reset timer
+            }
+
+            const opts = document.querySelectorAll('.v-opt');
+            opts.forEach(opt => opt.innerText === w ? opt.classList.add('active') : opt.classList.remove('active'));
+        }
+    </script>
+</body>
+</html>
